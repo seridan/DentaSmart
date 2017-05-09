@@ -1,0 +1,51 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29-mar-2017, 20:01:00
+    Author     : seridan
+*/
+
+.button{
+    -fx-background-color:  #0095a7;
+      
+}
+
+/*----------- Menu izquierdo ----------------*/
+.jfx-list-cell .label{
+   -fx-font-size: 15pt;
+    -fx-font-family: "Roboto Bold";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-opacity: 0.6;   
+    -fx-content-display: top;
+    
+}
+
+.jfx-list-cell:selected {
+    -fx-background-color: #6ef9ff;
+                        
+}
+
+.jfx-list-cell:hover{
+    -fx-background-color: #25c6d8;
+}
+
+.jfx-list-cell{
+    -fx-background-color: #0095a7;
+    -fx-alignment: CENTER;
+    
+           
+}
+
+#listViewMenu{
+    -fx-background-insets: 1;
+    -fx-background-color: #0095a7;
+    -fx-pref-width: 175;
+    
+       
+}
+
+/*----------- Fin menu izquierdo ----------------*/     
