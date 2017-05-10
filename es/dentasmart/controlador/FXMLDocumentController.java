@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import es.dentasmart.dao.DAOException;
 import es.dentasmart.dao.PacienteDAO;
+import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.dao.sqlite.SQLitePacienteDAO;
 import es.dentasmart.database.SqliteConnection;
 import es.dentasmart.modelo.Paciente;
@@ -50,13 +51,13 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         
-            ConectarSQlite();
+          /*  ConectarSQlite();
             try{
             PacienteDAO pDao = new SQLitePacienteDAO(conn);
             ObservableList<Paciente> pacientes = pDao.obtenerTodos();
             for (Paciente p: pacientes){
                 System.out.println(p);
-            }/*
+            }
             Paciente paciente =new Paciente();
             paciente.setNombrePaciente("Ana");
             paciente.setDniPaciente("42564987f");
@@ -64,7 +65,7 @@ public class FXMLDocumentController implements Initializable {
             paciente.setSegundoApellido("Alamo");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-M-yyyy");
             paciente.setFechaNac(LocalDate.parse("2-12-2000", formatter));
-            pDao.insertar(paciente);*/
+            pDao.insertar(paciente);
             
             } catch (DAOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,7 +77,25 @@ public class FXMLDocumentController implements Initializable {
                              Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                          }
                      }
-                     }       
+                     }   */
+
+          //nueva prueba con daomanager
+        SQLiteDaoManager man = null;
+        try {
+            man = new SQLiteDaoManager();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ObservableList<Paciente> pacientes = null;
+        try {
+            pacientes = man.getPacienteDAO().obtenerTodos();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        for (Paciente p: pacientes){
+            System.out.println(p);
+        }
+
                     try {
                         //Creamos un objeto listview con la configuracion del panelMenuPrincipal y lo insertamos en el drawer
                         listViewMenu = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelMenuPrincipal.fxml"));
