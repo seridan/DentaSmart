@@ -4,20 +4,8 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import es.dentasmart.dao.DAOException;
-import es.dentasmart.dao.PacienteDAO;
 import es.dentasmart.dao.sqlite.SQLiteDaoManager;
-import es.dentasmart.dao.sqlite.SQLitePacienteDAO;
-import es.dentasmart.database.SqliteConnection;
 import es.dentasmart.modelo.Paciente;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +13,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- *
  * @author serid
  */
 public class FXMLDocumentController implements Initializable {
@@ -43,9 +35,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private ListView listViewMenu;
-    
-    Connection conn;
-    
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,38 +71,35 @@ public class FXMLDocumentController implements Initializable {
                      }
                      }   */
 
-          //nueva prueba con daomanager
+        //nueva prueba con daomanager
         SQLiteDaoManager man = null;
-        try {
-            man = new SQLiteDaoManager();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        man = new SQLiteDaoManager();
+
         ObservableList<Paciente> pacientes = null;
         try {
             pacientes = man.getPacienteDAO().obtenerTodos();
         } catch (DAOException e) {
             e.printStackTrace();
         }
-        for (Paciente p: pacientes){
+        for (Paciente p : pacientes) {
             System.out.println(p);
         }
 
-                    try {
-                        //Creamos un objeto listview con la configuracion del panelMenuPrincipal y lo insertamos en el drawer
-                        listViewMenu = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelMenuPrincipal.fxml"));
-                        drawer.setSidePane(listViewMenu);
-                        funcionalidadMenu();
-                        //drawer.open(); //lo activamos si queremos que el menu se muestre al inicio de la aplicacion
-                        funcionamientoHamburguesa();
-                        //Hacemos que al iniciar el programa, se muestre la ventana home
-                        AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelHome.fxml"));
-                        anchorCentral.getChildren().setAll(pane);
-                        
-                    } catch (IOException ex) {
-                        Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-         
+        try {
+            //Creamos un objeto listview con la configuracion del panelMenuPrincipal y lo insertamos en el drawer
+            listViewMenu = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelMenuPrincipal.fxml"));
+            drawer.setSidePane(listViewMenu);
+            funcionalidadMenu();
+            //drawer.open(); //lo activamos si queremos que el menu se muestre al inicio de la aplicacion
+            funcionamientoHamburguesa();
+            //Hacemos que al iniciar el programa, se muestre la ventana home
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelHome.fxml"));
+            anchorCentral.getChildren().setAll(pane);
+
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
     }
 
@@ -177,19 +166,6 @@ public class FXMLDocumentController implements Initializable {
         });
 
     }
-    
-    /**
-     * Método de prueba de la conexión a SQlite
-     */
-    private void ConectarSQlite(){
-        conn = SqliteConnection.Conectar();
-        if(conn != null){
-            System.out.println("conectado");
-            
-        }else{
-            System.out.println("error al conectar");
-        }
-    }
-    
-    
+
+
 }
