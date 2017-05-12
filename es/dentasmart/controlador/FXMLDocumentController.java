@@ -70,7 +70,7 @@ public class FXMLDocumentController implements Initializable {
                          }
                      }
                      }   */
-
+/*
         //nueva prueba con daomanager
         SQLiteDaoManager man = null;
         man = new SQLiteDaoManager();
@@ -83,7 +83,7 @@ public class FXMLDocumentController implements Initializable {
         }
         for (Paciente p : pacientes) {
             System.out.println(p);
-        }
+        }*/
 
         try {
             //Creamos un objeto listview con la configuracion del panelMenuPrincipal y lo insertamos en el drawer
@@ -145,7 +145,7 @@ public class FXMLDocumentController implements Initializable {
                             anchorCentral.getChildren().setAll(pane);
                             break;
                         case 1:
-                            pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLpanelCliente.fxml"));
+                            pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLpanelPaciente.fxml"));
                             anchorCentral.getChildren().setAll(pane);
                             break;
                         case 2:

@@ -65,6 +65,10 @@ public class SQLiteDaoManager implements DAOManager {
         return paciente;
     }
 
+    /**
+     * Metodo que cierra la conexion cuando la aplicacion es cerrada o bien por el usuario
+     * o inesparadamente, el metodo se ejecutara.
+     */
     static class getClose extends Thread {
         @Override
         public void run() {
