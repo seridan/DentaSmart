@@ -11,7 +11,7 @@
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" stylesheets="@estilo.principal.css">
          <center>
-            <AnchorPane fx:id="anchorCentral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #6ef9ff;" stylesheets="@estilo.principal.css" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="anchorCentral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="766.0" prefWidth="1200.0" style="-fx-background-color: #6ef9ff;" stylesheets="@estilo.principal.css" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>

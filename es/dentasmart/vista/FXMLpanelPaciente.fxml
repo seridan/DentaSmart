@@ -1,32 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLpanelPacienteController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLpanelPacienteController">
    <children>
-      <BorderPane layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <JFXTextField alignment="CENTER" labelFloat="true" text="Ventana Clientes" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </JFXTextField>
-         </top>
-         <padding>
-            <Insets left="40.0" right="40.0" />
-         </padding>
-         <bottom>
-            <JFXButton buttonType="RAISED" BorderPane.alignment="CENTER" />
-         </bottom>
+      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <right>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="25.0" BorderPane.alignment="CENTER" />
+         </right>
          <center>
-            <JFXTreeTableView fx:id="tablaPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
+            <JFXTreeTableView fx:id="tablaPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="column-header" stylesheets="@estilo.panelPaciente.css" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </JFXTreeTableView>
          </center>
+         <bottom>
+            <GridPane fx:id="grid" hgap="20.0" stylesheets="@estilo.panelPaciente.css" vgap="30.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXTextField fx:id="dniTxt" focusColor="#0095a7" labelFloat="true" promptText="DNI" stylesheets="@estilo.panelPaciente.css">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="nombreTxt" focusColor="#0095a7" labelFloat="true" promptText="Nombre" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="apellido1Txt" focusColor="#0095a7" labelFloat="true" promptText="Primer Apellido" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="apellido2Txt" focusColor="#0095a7" labelFloat="true" promptText="Segundo Apellido" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="fechaNacTxt" focusColor="#0095a7" labelFloat="true" promptText="Fecha nacimiento" GridPane.columnIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="direccionTxt" focusColor="#0095a7" labelFloat="true" promptText="Dirección" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="localidad" focusColor="#0095a7" labelFloat="true" promptText="Localidad" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="codPostalTxt" focusColor="#0095a7" labelFloat="true" layoutX="25.0" layoutY="27.0" promptText="Código postal" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="tfnoFijoTxt" focusColor="#0095a7" labelFloat="true" promptText="Tfno. Fijo" GridPane.columnIndex="2">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="tfnoMovilTxt" focusColor="#0095a7" labelFloat="true" layoutX="110.0" layoutY="43.0" promptText="Tfno. Móvil" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="emailTxt" focusColor="#0095a7" labelFloat="true" layoutX="265.0" layoutY="27.0" promptText="Email" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="observTxt" focusColor="#0095a7" labelFloat="true" layoutX="245.0" layoutY="127.0" promptText="Observaciones" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </JFXTextField>
+               </children>
+               <BorderPane.margin>
+                  <Insets left="13.0" />
+               </BorderPane.margin>
+            </GridPane>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

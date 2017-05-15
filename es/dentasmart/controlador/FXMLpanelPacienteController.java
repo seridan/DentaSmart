@@ -31,37 +31,46 @@ public class FXMLpanelPacienteController implements Initializable {
     @FXML
     private JFXTreeTableView<Paciente> tablaPaciente;
 
+    ObservableList<Paciente> pacientes = null;
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         JFXTreeTableColumn<Paciente, Integer> idPaciente = new JFXTreeTableColumn<>("Id");
-        idPaciente.setPrefWidth(150);
+        idPaciente.setPrefWidth(50);
         idPaciente.setCellValueFactory(cellData -> cellData.getValue().getValue().IdPacienteProperty().asObject());
 
-        JFXTreeTableColumn<Paciente, String> nombrePaciente = new JFXTreeTableColumn<>("Nombre");
-        nombrePaciente.setPrefWidth(150);
-        nombrePaciente.setCellValueFactory(cellData -> cellData.getValue().getValue().NombrePacienteProperty());
-
         JFXTreeTableColumn<Paciente, String> dni = new JFXTreeTableColumn<>("DNI");
-        dni.setPrefWidth(150);
+        dni.setPrefWidth(85);
         dni.setCellValueFactory(cellData -> cellData.getValue().getValue().DniPacienteProperty());
 
+        JFXTreeTableColumn<Paciente, String> nombrePaciente = new JFXTreeTableColumn<>("Nombre");
+        nombrePaciente.setPrefWidth(100);
+        nombrePaciente.setCellValueFactory(cellData -> cellData.getValue().getValue().NombrePacienteProperty());
+
         JFXTreeTableColumn<Paciente, String> primerApellido = new JFXTreeTableColumn<>("Primer apellido");
-        primerApellido.setPrefWidth(150);
+        primerApellido.setPrefWidth(120);
         primerApellido.setCellValueFactory(cellData -> cellData.getValue().getValue().PrimerApellidoProperty());
 
         JFXTreeTableColumn<Paciente, String> segundoApellido = new JFXTreeTableColumn<>("Segundo apellido");
-        segundoApellido.setPrefWidth(150);
+        segundoApellido.setPrefWidth(120);
         segundoApellido.setCellValueFactory(cellData -> cellData.getValue().getValue().SegundoApellidoProperty());
 
         JFXTreeTableColumn<Paciente, LocalDate> fechaNac = new JFXTreeTableColumn<>("Fecha nacimiento");
-        fechaNac.setPrefWidth(150);
+        fechaNac.setPrefWidth(120);
         fechaNac.setCellValueFactory(cellData -> cellData.getValue().getValue().FechaNacProperty());
+
+        JFXTreeTableColumn<Paciente, String> tfnoFijo = new JFXTreeTableColumn<>("Tfno. Fijo");
+        tfnoFijo.setPrefWidth(120);
+        tfnoFijo.setCellValueFactory(cellData -> cellData.getValue().getValue().TelefonoFijoProperty());
 
         SQLiteDaoManager man = null;
         man = new SQLiteDaoManager();
 
-        ObservableList<Paciente> pacientes = null;
+
         try {
             pacientes = man.getPacienteDAO().obtenerTodos();
         } catch (DAOException e) {
@@ -69,11 +78,19 @@ public class FXMLpanelPacienteController implements Initializable {
         }
 
         final TreeItem<Paciente> root = new RecursiveTreeItem<Paciente>(pacientes, RecursiveTreeObject::getChildren);
-        tablaPaciente.getColumns().setAll(idPaciente, nombrePaciente, dni, primerApellido, segundoApellido, fechaNac);
+        tablaPaciente.getColumns().setAll(idPaciente, dni, nombrePaciente, primerApellido, segundoApellido, fechaNac, tfnoFijo);
         tablaPaciente.setRoot(root);
         tablaPaciente.setShowRoot(false);
 
+        getPacienteTableClicked();
 
+
+    }
+
+    private void getPacienteTableClicked(){
+
+     //  Paciente pacienteSeleccionado = tablaPaciente.getSelectionModel().getSelectedItem();
+     //   System.out.println(pacienteSeleccionado);
     }
 
 
