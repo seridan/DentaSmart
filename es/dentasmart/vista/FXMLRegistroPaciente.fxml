@@ -1,11 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.2185929648241206" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.06656580937972768" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="663.0" prefWidth="881.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="598.0" />
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="598.0">
+         <children>
+            <HBox layoutX="73.0" layoutY="35.0" prefHeight="614.0" prefWidth="879.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox prefHeight="614.0" prefWidth="270.0" spacing="30.0">
+                     <children>
+                        <JFXTextField fx:id="dniTxt" focusColor="#0095a7" labelFloat="true" promptText="DNI" stylesheets="@estilo.panelPaciente.css" />
+                        <JFXTextField fx:id="nombreTxt" focusColor="#0095a7" labelFloat="true" promptText="Nombre" />
+                        <JFXTextField fx:id="apellido1Txt" focusColor="#0095a7" labelFloat="true" promptText="Primer Apellido" />
+                        <JFXTextField fx:id="apellido2Txt" focusColor="#0095a7" labelFloat="true" promptText="Segundo Apellido">
+                           <padding>
+                              <Insets bottom="9.0" top="9.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="fechaNacTxt" focusColor="#0095a7" labelFloat="true" promptText="Fecha nacimiento">
+                           <padding>
+                              <Insets top="9.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="direccionTxt" focusColor="#0095a7" labelFloat="true" promptText="Dirección">
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="614.0" prefWidth="270.0" spacing="30.0">
+                     <children>
+                        <JFXTextField fx:id="localidad" focusColor="#0095a7" labelFloat="true" promptText="Localidad">
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="codPostalTxt" focusColor="#0095a7" labelFloat="true" promptText="Código postal">
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="tfnoFijoTxt" focusColor="#0095a7" labelFloat="true" promptText="Tfno. Fijo">
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="tfnoMovilTxt" focusColor="#0095a7" labelFloat="true" promptText="Tfno. Móvil">
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="emailTxt" focusColor="#0095a7" labelFloat="true" promptText="Email">
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                        <JFXTextField fx:id="observTxt" focusColor="#0095a7" labelFloat="true" promptText="Observaciones">
+                           <padding>
+                              <Insets bottom="10.0" top="10.0" />
+                           </padding>
+                        </JFXTextField>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children></AnchorPane>
   </items>
 </SplitPane>
