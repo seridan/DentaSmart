@@ -5,6 +5,7 @@
  */
 package es.dentasmart.controlador;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -13,10 +14,17 @@ import es.dentasmart.dao.DAOException;
 import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.modelo.Paciente;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -30,6 +38,22 @@ public class FXMLpanelPacienteController implements Initializable {
 
     @FXML
     private JFXTreeTableView<Paciente> tablaPaciente;
+
+    @FXML
+    private JFXButton nuevoBtn;
+
+    @FXML
+    void nuevoPaciente(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/dentasmart/vista/FXMLRegistroPaciente.fxml"));
+        Parent root1 = fxmlLoader.load();
+        Stage panelRegistro = new Stage();
+        panelRegistro.initModality(Modality.APPLICATION_MODAL);
+        panelRegistro.setTitle("Gestión de Pacientes");
+        panelRegistro.setScene(new Scene(root1));
+        panelRegistro.show();
+
+    }
 
     ObservableList<Paciente> pacientes = null;
 

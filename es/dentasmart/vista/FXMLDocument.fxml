@@ -5,13 +5,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:id="stackPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLDocumentController">
    <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" stylesheets="@estilo.principal.css">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@estilo.principal.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <AnchorPane fx:id="anchorCentral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="766.0" prefWidth="1200.0" style="-fx-background-color: #6ef9ff;" stylesheets="@estilo.principal.css" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="anchorCentral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #f5f5f5;" stylesheets="@estilo.principal.css">
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
@@ -29,4 +28,4 @@
          </left>
       </BorderPane>
    </children>
-</StackPane>
+</AnchorPane>

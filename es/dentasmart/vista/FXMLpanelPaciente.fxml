@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
@@ -8,20 +9,20 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLpanelPacienteController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLpanelPacienteController"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <right>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="25.0" BorderPane.alignment="CENTER" />
-         </right>
          <center>
-            <JFXTreeTableView fx:id="tablaPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="column-header" stylesheets="@estilo.panelPaciente.css" BorderPane.alignment="CENTER">
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <BorderPane.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </BorderPane.margin>
-            </JFXTreeTableView>
+               <children>
+                  <JFXTreeTableView fx:id="tablaPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="column-header" stylesheets="@estilo.panelPaciente.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
          </center>
          <bottom>
             <GridPane fx:id="grid" hgap="20.0" stylesheets="@estilo.panelPaciente.css" vgap="30.0" BorderPane.alignment="CENTER">
@@ -96,6 +97,7 @@
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
                   </JFXTextField>
+                  <JFXButton fx:id="nuevoBtn" onAction="#nuevoPaciente" text="Nuevo" />
                </children>
                <BorderPane.margin>
                   <Insets left="13.0" />

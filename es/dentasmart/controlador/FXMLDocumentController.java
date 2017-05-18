@@ -130,6 +130,8 @@ public class FXMLDocumentController implements Initializable {
      */
     private void funcionalidadMenu() throws IOException {
 
+
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/dentasmart/vista/FXMLPanelMenuPrincipal.fxml"));
         loader.load();
         //FXMLPanelMenuPrincipalController controlerPanelPrincipal = loader.getController();
@@ -141,19 +143,19 @@ public class FXMLDocumentController implements Initializable {
                     System.out.println("o = " + o + " (" + o.getClass() + ")");
                     switch (o.hashCode()) {
                         case 0:
-                            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelHome.fxml"));
+                            AnchorPane pane = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelHome.fxml"));
                             anchorCentral.getChildren().setAll(pane);
                             break;
                         case 1:
-                            pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLpanelPaciente.fxml"));
+                            pane = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLpanelPaciente.fxml"));
                             anchorCentral.getChildren().setAll(pane);
                             break;
                         case 2:
-                            pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelCitas.fxml"));
+                            pane = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelCitas.fxml"));
                             anchorCentral.getChildren().setAll(pane);
                             break;
                         case 3:
-                            pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelAgenda.fxml"));
+                            pane = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelAgenda.fxml"));
                             anchorCentral.getChildren().setAll(pane);
                             break;
 

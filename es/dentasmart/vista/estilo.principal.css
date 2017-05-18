@@ -25,12 +25,12 @@ and open the template in the editor.
 }
 
 .jfx-list-cell:selected {
-    -fx-background-color: #6ef9ff;
+    -fx-background-color:#eceff1;
                         
 }
 
 .jfx-list-cell:hover{
-    -fx-background-color: #25c6d8;
+    -fx-background-color: #eceff1;
 }
 
 .jfx-list-cell{
