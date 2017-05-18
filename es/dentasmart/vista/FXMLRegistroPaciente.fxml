@@ -12,9 +12,9 @@
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="598.0">
          <children>
-            <HBox layoutX="73.0" layoutY="35.0" prefHeight="614.0" prefWidth="879.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox layoutX="73.0" layoutY="35.0" prefHeight="614.0" prefWidth="879.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <VBox prefHeight="614.0" prefWidth="270.0" spacing="30.0">
+                  <VBox prefHeight="614.0" prefWidth="270.0" spacing="30.0" HBox.hgrow="ALWAYS">
                      <children>
                         <JFXTextField fx:id="dniTxt" focusColor="#0095a7" labelFloat="true" promptText="DNI" stylesheets="@estilo.panelPaciente.css" />
                         <JFXTextField fx:id="nombreTxt" focusColor="#0095a7" labelFloat="true" promptText="Nombre" />
@@ -35,8 +35,11 @@
                            </padding>
                         </JFXTextField>
                      </children>
+                     <HBox.margin>
+                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                     </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="614.0" prefWidth="270.0" spacing="30.0">
+                  <VBox prefHeight="614.0" prefWidth="270.0" spacing="30.0" HBox.hgrow="ALWAYS">
                      <children>
                         <JFXTextField fx:id="localidad" focusColor="#0095a7" labelFloat="true" promptText="Localidad">
                            <padding>
@@ -69,6 +72,9 @@
                            </padding>
                         </JFXTextField>
                      </children>
+                     <HBox.margin>
+                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>
