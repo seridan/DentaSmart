@@ -10,23 +10,31 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="725.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="725.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLRegistroPacienteController">
    <children>
       <SplitPane dividerPositions="0.06845637583892618" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="726.0" prefWidth="1006.0" stylesheets="@estilo.registro_cliente.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Label layoutX="564.0" layoutY="18.0" prefHeight="34.0" prefWidth="155.0" text="Label" />
+                  <BorderPane fx:id="toolBar" layoutX="-6.0" layoutY="-76.0" prefHeight="47.0" prefWidth="1040.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <left>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
                </children>
             </AnchorPane>
           <AnchorPane prefHeight="580.0" prefWidth="796.0">
                <children>
                   <HBox layoutY="26.0" prefHeight="573.0" prefWidth="844.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="671.0" prefWidth="191.0" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="vBoxDatosPer" prefHeight="671.0" prefWidth="191.0" HBox.hgrow="ALWAYS">
                            <children>
                               <JFXTextField focusColor="WHITE" focusTraversable="false" mouseTransparent="true" style="-fx-background-color: #56c8d8;" text="Datos Personales" unFocusColor="#ffffffcc">
                                  <cursor>
@@ -51,7 +59,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                         </VBox>
-                        <VBox prefHeight="669.0" prefWidth="189.0" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="vBoxDatosMed" prefHeight="669.0" prefWidth="189.0" HBox.hgrow="ALWAYS">
                            <children>
                               <JFXTextField focusColor="WHITE" focusTraversable="false" labelFloat="true" mouseTransparent="true" style="-fx-background-color: #56c8d8;" text="Datos Médicos" unFocusColor="#ffffffcc">
                                  <cursor>
@@ -62,7 +70,7 @@
                                  </VBox.margin>
                               </JFXTextField>
                               <Label text="Fecha de nacimiento:" textFill="#aeaeae" />
-                              <JFXDatePicker />
+                              <JFXDatePicker fx:id="fechaNacTxt" />
                               <JFXTextField fx:id="localidad" focusColor="#0095a7" labelFloat="true" promptText="Patologías" />
                               <JFXTextField fx:id="codPostalTxt" focusColor="#0095a7" labelFloat="true" promptText="Alergias" />
                               <JFXTextField fx:id="tfnoFijoTxt" focusColor="#0095a7" labelFloat="true" promptText="H.B.D." />
@@ -78,7 +86,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
                         </VBox>
-                        <VBox prefHeight="671.0" prefWidth="299.0">
+                        <VBox fx:id="vBoxCita" prefHeight="671.0" prefWidth="299.0">
                            <HBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </HBox.margin>
@@ -92,9 +100,9 @@
                                  </VBox.margin>
                               </JFXTextField>
                               <Label text="Seleccione día:" textFill="#aeaeae" />
-                              <JFXDatePicker />
+                              <JFXDatePicker fx:id="fechaCitaTxt" />
                               <Label text="Seleccione hora:" textFill="#aeaeae" />
-                              <JFXDatePicker layoutX="21.0" layoutY="73.0" />
+                              <JFXDatePicker fx:id="horaCitaTxt" layoutX="21.0" layoutY="73.0" />
                               <Separator prefHeight="105.0" prefWidth="277.0" />
                               <HBox spacing="5.0">
                                  <children>

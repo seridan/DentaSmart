@@ -1,4 +1,4 @@
-VBox {
+#vBoxDatosPer, #vBoxDatosMed, #vBoxCita {
    -fx-background-color: white;
    -fx-spacing:30;
    -fx-font-size: 13 pt;
@@ -8,14 +8,14 @@ VBox {
    -fx-background-insets: 0.0 0.0 0.0 0.0;
    -fx-border-radius: 15;
    -fx-border-color: #BDBDBD;
-
    -fx-padding: 0 10 10 10;
-
 }
 
-
-Hbox{
-
+#toolBar{
+   -fx-background-color: #0095a7;
+   -fx-alignment: center;
+   -fx-spacing: 25;
+   -fx-padding: 0 10;
 }
 
 #btnGuardar{
@@ -37,7 +37,7 @@ Hbox{
    -fx-font-family: "Material Icons";
    -fx-text-fill: white;
    -fx-opacity: 0.85;
-   -fx-background-color: #009688
+   -fx-background-color: #0095a7;
 
 
   }
@@ -48,9 +48,13 @@ Hbox{
   -fx-font-family: "Material Icons";
   -fx-text-fill: white;
   -fx-opacity: 0.85;
-  -fx-background-color: #0097a7
+  -fx-background-color: #0097a7;
 
   }
+.jfx-date-picker{
+ -jfx-default-color: #0095a7;
+}
+
 
 #btnLimpiar{
  -fx-font-size: 13 pt;
