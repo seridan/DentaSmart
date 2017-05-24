@@ -51,7 +51,7 @@
   -fx-background-color: #0097a7;
 
   }
-.jfx-date-picker{
+.jfx-date-picker, .jfx-time-picker{
  -jfx-default-color: #0095a7;
 }
 

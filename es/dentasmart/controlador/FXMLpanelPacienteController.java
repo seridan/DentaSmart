@@ -113,8 +113,8 @@ public class FXMLpanelPacienteController implements Initializable {
 
     private void getPacienteTableClicked(){
 
-     //  Paciente pacienteSeleccionado = tablaPaciente.getSelectionModel().getSelectedItem();
-     //   System.out.println(pacienteSeleccionado);
+       //Paciente pacienteSeleccionado = tablaPaciente.getSelectionModel().getSelectedItems;
+        //System.out.println(pacienteSeleccionado);
     }
 
 

@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -102,7 +103,7 @@
                               <Label text="Seleccione día:" textFill="#aeaeae" />
                               <JFXDatePicker fx:id="fechaCitaTxt" />
                               <Label text="Seleccione hora:" textFill="#aeaeae" />
-                              <JFXDatePicker fx:id="horaCitaTxt" layoutX="21.0" layoutY="73.0" />
+                              <JFXTimePicker fx:id="horaCitaTxt" />
                               <Separator prefHeight="105.0" prefWidth="277.0" />
                               <HBox spacing="5.0">
                                  <children>

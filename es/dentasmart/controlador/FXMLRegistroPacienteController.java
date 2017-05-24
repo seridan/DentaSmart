@@ -70,12 +70,14 @@ public class FXMLRegistroPacienteController implements Initializable {
     private JFXDatePicker fechaCitaTxt;
 
     @FXML
-    private JFXDatePicker horaCitaTxt;
+    private JFXTimePicker horaCitaTxt;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        
+
+        horaCitaTxt._24HourViewProperty().setValue(true);
+
 
     }
 }
