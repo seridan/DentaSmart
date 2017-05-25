@@ -6,7 +6,10 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -72,11 +75,16 @@ public class FXMLRegistroPacienteController implements Initializable {
     @FXML
     private JFXTimePicker horaCitaTxt;
 
+    @FXML
+    private SplitPane splitPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
+        //Da formato de 24h. al timePicker
         horaCitaTxt._24HourViewProperty().setValue(true);
+
+
 
 
     }

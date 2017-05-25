@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTimePicker?>
@@ -14,19 +15,38 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="725.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.dentasmart.controlador.FXMLRegistroPacienteController">
    <children>
-      <SplitPane dividerPositions="0.06845637583892618" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="726.0" prefWidth="1006.0" stylesheets="@estilo.registro_cliente.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane fx:id="splitPane" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="726.0" prefWidth="1006.0" stylesheets="@estilo.registro_cliente.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane fx:id="anchorToolBar" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="160.0">
                <children>
-                  <BorderPane fx:id="toolBar" layoutX="-6.0" layoutY="-76.0" prefHeight="47.0" prefWidth="1040.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <BorderPane fx:id="toolBar" layoutX="-6.0" layoutY="-76.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <left>
-                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <HBox BorderPane.alignment="CENTER">
+                           <children>
+                              <JFXButton fx:id="btnVolver" prefHeight="64.0" prefWidth="60.0" />
+                              <Label text="Gestión de Pacientes" textFill="WHITE">
+                                 <padding>
+                                    <Insets left="80.0" top="15.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                           </children></HBox>
                      </left>
                      <right>
-                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <HBox BorderPane.alignment="CENTER">
+                           <children>
+                              <JFXHamburger>
+                                 <padding>
+                                    <Insets right="24.0" />
+                                 </padding>
+                              </JFXHamburger>
+                           </children></HBox>
                      </right>
                   </BorderPane>
                </children>
