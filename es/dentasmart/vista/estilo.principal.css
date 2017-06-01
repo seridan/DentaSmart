@@ -1,17 +1,9 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
     Created on : 29-mar-2017, 20:01:00
     Author     : seridan
 */
 
-.button{
-    -fx-background-color:  #0095a7;
-      
-}
+
 
 /*----------- Menu izquierdo ----------------*/
 .jfx-list-cell .label{
@@ -21,31 +13,74 @@ and open the template in the editor.
     -fx-text-fill: black;
     -fx-opacity: 0.6;
     -fx-content-display: top;
-    
-}
+  }
 
 .jfx-list-cell:selected {
     -fx-background-color:#eceff1;
-                        
-}
+  }
 
 .jfx-list-cell:hover{
     -fx-background-color: #eceff1;
-}
+ }
 
 .jfx-list-cell{
     -fx-background-color: #0095a7;
     -fx-alignment: CENTER;
-    
-           
-}
+  }
 
 #listViewMenu{
-    -fx-background-insets: 1;
+    -fx-background-insets: 1 1 0 0 ;
     -fx-background-color: #0095a7;
     -fx-pref-width: 175;
-    
-       
-}
+    -fx-background-radius: 1;
+  }
 
 /*----------- Fin menu izquierdo ----------------*/     
+
+
+/*-------------- Tool Bar -----------------------*/
+
+.jfx-hamburger StackPane {
+    -fx-background-color: white;
+	-fx-padding: 0 24 0 0;
+ }
+
+#anchorToolBar{
+    -fx-background-color:  #0095a7;
+
+}
+
+#btnNuevo{
+  -fx-font-size: 13 pt;
+  -fx-graphic: "/es/dentasmart/images/account_plus.png";
+  -fx-font-family: "Material Icons";
+  -fx-text-fill: white;
+  -fx-opacity: 0.85;
+  -fx-background-color: #0097a7;
+
+  }
+
+ #btnEditar{
+   -fx-font-size: 13 pt;
+   -fx-graphic: "/es/dentasmart/images/account_edit.png";
+   -fx-font-family: "Material Icons";
+   -fx-text-fill: white;
+   -fx-opacity: 0.85;
+   -fx-background-color: #0097a7;
+
+   }
+
+#btnBorrar{
+  -fx-font-size: 13 pt;
+  -fx-graphic: "/es/dentasmart/images/account_minus.png";
+  -fx-font-family: "Material Icons";
+  -fx-text-fill: white;
+  -fx-opacity: 0.85;
+  -fx-background-color: #FF9800;
+
+  }
+  #imageViewBuscar{
+    -fx-graphic: "/es/dentasmart/images/account_plus.png";
+    -fx-background-image: url('/es/dentasmart/images/account_plus.png');
+
+   }

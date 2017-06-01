@@ -90,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
             listViewMenu = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelMenuPrincipal.fxml"));
             drawer.setSidePane(listViewMenu);
             funcionalidadMenu();
-            //drawer.open(); //lo activamos si queremos que el menu se muestre al inicio de la aplicacion
+            drawer.open(); //lo activamos si queremos que el menu se muestre al inicio de la aplicacion
             funcionamientoHamburguesa();
             //Hacemos que al iniciar el programa, se muestre la ventana home
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelHome.fxml"));

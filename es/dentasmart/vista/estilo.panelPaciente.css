@@ -5,7 +5,7 @@
 
 }
 .tree-table-view:focused .tree-table-row-cell:selected {
-    -fx-background-color: -fx-tree-table-color  ;
+    -fx-background-color: -fx-tree-table-color;
     -fx-table-cell-border-color: -fx-tree-table-color;
 }
 
@@ -25,6 +25,8 @@
  -fx-font-size: 13 pt;
  -fx-font-family: "Roboto Regular";
  -fx-opacity: 0.87;
+
+
 }
 
 .tree-table-view .column-header ,
@@ -35,7 +37,7 @@
 
 .tree-table-view .column-header{
     -fx-border-width : 0 1 0 1;
-    -fx-border-color: #F3F3F3;
+    -fx-border-color: transparent;
     -fx-font-size: 10pt;
     -fx-font-family: "Roboto Regular";
     -fx-opacity: 0.54;
@@ -45,6 +47,7 @@
 .tree-table-view .column-header .label {
     -fx-text-fill : #949494;
     -fx-padding : 16 0 16 0 ;
+
 }
 
 .tree-table-view .column-header .arrow, .tree-table-view .column-header .sort-order-dot{
@@ -59,17 +62,17 @@
     -fx-border-width : 0 0.0 1 0;
 }
 
-#grid{
-    -fx-background-color: white;
-    -fx-font-size: 13 pt;
-    -fx-font-family: "Roboto Regular";
-    -fx-opacity: 0.87;
-    -fx-background-radius: 5.0;
-    -fx-background-insets: 0.0 5.0 0.0 5.0;
-    -fx-padding: 15;
-    -fx-hgap: 10;
-    -fx-vgap: 20;
+/*********Fin Tabla***************/
 
-}
+HBox{
+  -fx-padding: 15 0 0 22;
 
+    }
+#imageViewBuscar{
+    -fx-graphic: "/es/dentasmart/images/account_plus.png";
+    -fx-background-image: url('/es/dentasmart/images/account_plus.png');
+    -fx-background: blue;
+
+
+   }
 
