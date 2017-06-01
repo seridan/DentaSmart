@@ -68,11 +68,4 @@ HBox{
   -fx-padding: 15 0 0 22;
 
     }
-#imageViewBuscar{
-    -fx-graphic: "/es/dentasmart/images/account_plus.png";
-    -fx-background-image: url('/es/dentasmart/images/account_plus.png');
-    -fx-background: blue;
-
-
-   }
 

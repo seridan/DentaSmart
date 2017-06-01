@@ -38,7 +38,7 @@
                               <Image url="@../images/magnifyb.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField prefHeight="25.0" prefWidth="220.0" promptText="Buscar" />
+                        <JFXTextField focusColor="#0095a7" prefHeight="25.0" prefWidth="220.0" promptText="Buscar" unFocusColor="#949494" />
                      </children>
                      <padding>
                         <Insets left="22.0" top="15.0" />
