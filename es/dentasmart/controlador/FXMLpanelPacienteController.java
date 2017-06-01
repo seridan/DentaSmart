@@ -5,14 +5,13 @@
  */
 package es.dentasmart.controlador;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import es.dentasmart.dao.DAOException;
 import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.modelo.Paciente;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 /**
  * FXML Controller class
@@ -41,6 +41,10 @@ public class FXMLpanelPacienteController implements Initializable {
 
     @FXML
     private JFXButton nuevoBtn;
+
+    @FXML
+    private JFXTextField txtBuscar;
+
 
     @FXML
     void nuevoPaciente(ActionEvent event) throws IOException {
@@ -106,7 +110,21 @@ public class FXMLpanelPacienteController implements Initializable {
         tablaPaciente.setRoot(root);
         tablaPaciente.setShowRoot(false);
 
-        getPacienteTableClicked();
+        txtBuscar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                tablaPaciente.setPredicate(new Predicate<TreeItem<Paciente>>() {
+                    @Override
+                    public boolean test(TreeItem<Paciente> pacienteTreeItem) {
+                        Boolean flag = pacienteTreeItem.getValue().getNombrePaciente().toLowerCase().contains(newValue.toLowerCase())||
+                                pacienteTreeItem.getValue().getPrimerApellido().toLowerCase().contains(newValue.toLowerCase())||
+                                pacienteTreeItem.getValue().getSegundoApellido().toLowerCase().contains(newValue.toLowerCase())||
+                                pacienteTreeItem.getValue().getDniPaciente().toLowerCase().contains(newValue.toLowerCase());
+                        return flag;
+                    }
+                });
+            }
+        });
 
 
     }
