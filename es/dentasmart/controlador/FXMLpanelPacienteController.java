@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -45,6 +46,20 @@ public class FXMLpanelPacienteController implements Initializable {
     @FXML
     private JFXTextField txtBuscar;
 
+    ObservableList<Paciente> pacientes = null;
+    Paciente pacienteSeleccionado = null;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+        cargarTablaPacientes();
+        busqueda();
+        getPacienteSeleccionado();
+
+    }
+
+
 
     @FXML
     void nuevoPaciente(ActionEvent event) throws IOException {
@@ -59,17 +74,22 @@ public class FXMLpanelPacienteController implements Initializable {
 
     }
 
-    ObservableList<Paciente> pacientes = null;
+    private void busqueda(){
 
+        txtBuscar.textProperty().addListener((observable, oldValue, newValue) -> tablaPaciente.setPredicate(pacienteTreeItem -> {
+            Boolean flag = pacienteTreeItem.getValue().getNombrePaciente().toLowerCase().contains(newValue.toLowerCase())||
+                    pacienteTreeItem.getValue().getPrimerApellido().toLowerCase().contains(newValue.toLowerCase())||
+                    pacienteTreeItem.getValue().getSegundoApellido().toLowerCase().contains(newValue.toLowerCase())||
+                    pacienteTreeItem.getValue().getDniPaciente().toLowerCase().contains(newValue.toLowerCase())||
+                    pacienteTreeItem.getValue().IdPacienteProperty().asString().getValue().contains(newValue);
+            return flag;
+        }));
+    }
 
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
+    private void cargarTablaPacientes(){
         JFXTreeTableColumn<Paciente, Integer> idPaciente = new JFXTreeTableColumn<>("Id");
         idPaciente.setPrefWidth(50);
-        idPaciente.setCellValueFactory(cellData -> cellData.getValue().getValue().IdPacienteProperty().asObject());
+        idPaciente.setCellValueFactory(cellData -> cellData.getValue().getValue().IdPacienteProperty().asObject());//el metodo asObject se utiliza para integer
 
         JFXTreeTableColumn<Paciente, String> dni = new JFXTreeTableColumn<>("DNI");
         dni.setPrefWidth(85);
@@ -109,36 +129,18 @@ public class FXMLpanelPacienteController implements Initializable {
         tablaPaciente.getColumns().setAll(idPaciente, dni, nombrePaciente, primerApellido, segundoApellido, fechaNac, tfnoFijo);
         tablaPaciente.setRoot(root);
         tablaPaciente.setShowRoot(false);
+    }
 
-        txtBuscar.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                tablaPaciente.setPredicate(new Predicate<TreeItem<Paciente>>() {
-                    @Override
-                    public boolean test(TreeItem<Paciente> pacienteTreeItem) {
-                        Boolean flag = pacienteTreeItem.getValue().getNombrePaciente().toLowerCase().contains(newValue.toLowerCase())||
-                                pacienteTreeItem.getValue().getPrimerApellido().toLowerCase().contains(newValue.toLowerCase())||
-                                pacienteTreeItem.getValue().getSegundoApellido().toLowerCase().contains(newValue.toLowerCase())||
-                                pacienteTreeItem.getValue().getDniPaciente().toLowerCase().contains(newValue.toLowerCase());
-                        return flag;
-                    }
-                });
-            }
+    private Paciente getPacienteSeleccionado(){
+        tablaPaciente.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            System.out.println("aqui llega");
+            if (newValue != null)
+                System.out.println(newValue.getValue());
+            pacienteSeleccionado = newValue.getValue();
+            System.out.println("el paciente seleccionado es: " + pacienteSeleccionado + "\n el nombre es: "+ pacienteSeleccionado.getNombrePaciente());
+
         });
-
-
+        return pacienteSeleccionado;
     }
-
-    private void getPacienteTableClicked(){
-
-       //Paciente pacienteSeleccionado = tablaPaciente.getSelectionModel().getSelectedItems;
-        //System.out.println(pacienteSeleccionado);
-    }
-
-
-
-
-
-
 }
 
