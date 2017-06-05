@@ -74,6 +74,20 @@ public class FXMLpanelPacienteController implements Initializable {
 
     }
 
+    @FXML
+    void editarPaciente(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/dentasmart/vista/FXMLRegistroPaciente.fxml"));
+        Parent root1 = fxmlLoader.load();
+        Stage panelRegistro = new Stage();
+        FXMLRegistroPacienteController controller = fxmlLoader.getController();
+        controller.setPacienteSeleccionado(pacienteSeleccionado);
+        panelRegistro.initModality(Modality.APPLICATION_MODAL);
+        panelRegistro.setTitle("Gestión de Pacientes");
+        panelRegistro.setScene(new Scene(root1));
+        panelRegistro.show();
+    }
+
+
     private void busqueda(){
 
         txtBuscar.textProperty().addListener((observable, oldValue, newValue) -> tablaPaciente.setPredicate(pacienteTreeItem -> {
@@ -131,13 +145,12 @@ public class FXMLpanelPacienteController implements Initializable {
         tablaPaciente.setShowRoot(false);
     }
 
-    private Paciente getPacienteSeleccionado(){
+    public Paciente getPacienteSeleccionado(){
         tablaPaciente.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
-            System.out.println("aqui llega");
             if (newValue != null)
                 System.out.println(newValue.getValue());
             pacienteSeleccionado = newValue.getValue();
-            System.out.println("el paciente seleccionado es: " + pacienteSeleccionado + "\n el nombre es: "+ pacienteSeleccionado.getNombrePaciente());
+            System.out.println("el paciente seleccionado es: " + pacienteSeleccionado + "\nel nombre es: "+ pacienteSeleccionado.getNombrePaciente());
 
         });
         return pacienteSeleccionado;
