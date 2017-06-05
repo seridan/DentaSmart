@@ -20,7 +20,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </BorderPane.margin>
                <children>
-                  <JFXTreeTableView fx:id="tablaPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="column-header" stylesheets="@estilo.panelPaciente.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <JFXTreeTableView fx:id="tablaPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#dobleClick" styleClass="column-header" stylesheets="@estilo.panelPaciente.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </center>

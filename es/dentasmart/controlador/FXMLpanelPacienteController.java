@@ -21,6 +21,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -76,15 +78,17 @@ public class FXMLpanelPacienteController implements Initializable {
 
     @FXML
     void editarPaciente(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/dentasmart/vista/FXMLRegistroPaciente.fxml"));
-        Parent root1 = fxmlLoader.load();
-        Stage panelRegistro = new Stage();
-        FXMLRegistroPacienteController controller = fxmlLoader.getController();
-        controller.setPacienteSeleccionado(pacienteSeleccionado);
-        panelRegistro.initModality(Modality.APPLICATION_MODAL);
-        panelRegistro.setTitle("Gestión de Pacientes");
-        panelRegistro.setScene(new Scene(root1));
-        panelRegistro.show();
+        abrirVentanaEdicion();
+    }
+
+    @FXML
+    void dobleClick(MouseEvent event) throws IOException {
+        if(event.getButton().equals(MouseButton.PRIMARY)){
+            if(event.getClickCount() == 2){
+                abrirVentanaEdicion();
+            }
+        }
+
     }
 
 
@@ -145,7 +149,7 @@ public class FXMLpanelPacienteController implements Initializable {
         tablaPaciente.setShowRoot(false);
     }
 
-    public Paciente getPacienteSeleccionado(){
+    private Paciente getPacienteSeleccionado(){
         tablaPaciente.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             if (newValue != null)
                 System.out.println(newValue.getValue());
@@ -154,6 +158,20 @@ public class FXMLpanelPacienteController implements Initializable {
 
         });
         return pacienteSeleccionado;
+    }
+
+    private void abrirVentanaEdicion() throws IOException {
+        if (getPacienteSeleccionado()!= null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/dentasmart/vista/FXMLRegistroPaciente.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage panelRegistro = new Stage();
+            FXMLRegistroPacienteController controller = fxmlLoader.getController();
+            controller.setPacienteSeleccionado(pacienteSeleccionado);
+            panelRegistro.initModality(Modality.APPLICATION_MODAL);
+            panelRegistro.setTitle("Gestión de Pacientes");
+            panelRegistro.setScene(new Scene(root1));
+            panelRegistro.show();
+        }
     }
 }
 
