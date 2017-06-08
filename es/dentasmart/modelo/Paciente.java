@@ -32,6 +32,7 @@ public class Paciente extends RecursiveTreeObject<Paciente> {
     private final StringProperty telefono_movil;
     private final SimpleObjectProperty<LocalDate> fecha_nac;
     private final StringProperty observaciones;
+    private final StringProperty patologias;
 
 
     //Constructor
@@ -49,6 +50,7 @@ public class Paciente extends RecursiveTreeObject<Paciente> {
         this.telefono_movil = new SimpleStringProperty();
         this.fecha_nac = new SimpleObjectProperty<>();
         this.observaciones = new SimpleStringProperty();
+        this.patologias = new SimpleStringProperty();
 
     }
 
@@ -200,11 +202,9 @@ public class Paciente extends RecursiveTreeObject<Paciente> {
     public LocalDate getFechaNac() {
         return fecha_nac.get();
     }
-
     public void setFechaNac(LocalDate fechaNac) {
         this.fecha_nac.set(fechaNac);
     }
-
     public SimpleObjectProperty<LocalDate> FechaNacProperty() {
         return fecha_nac;
     }
@@ -222,9 +222,37 @@ public class Paciente extends RecursiveTreeObject<Paciente> {
         return observaciones;
     }
 
-    @Override
-    public String toString() {
-        return "Paciente{" + "id_paciente=" + id_paciente + ", dni_paciente=" + dni_paciente + ", localidad=" + localidad + ", nombre_paciente=" + nombre_paciente + ", primer_apellido=" + primer_apellido + ", segundo_apellido=" + segundo_apellido + ", direccion_calle=" + direccion_calle + ", codigo_postal=" + codigo_postal + ", email=" + email + ", telefono_fijo=" + telefono_fijo + ", telefono_movil=" + telefono_movil + ", fecha_nac=" + fecha_nac + '}';
+    //patologias
+    public String getPatologias() {
+        return patologias.get();
     }
 
+    public void setPatologias(String patologias) {
+        this.patologias.set(patologias);
+    }
+
+    public StringProperty PatologiasProperty() {
+        return patologias;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "id_paciente=" + id_paciente +
+                ", dni_paciente=" + dni_paciente +
+                ", localidad=" + localidad +
+                ", nombre_paciente=" + nombre_paciente +
+                ", primer_apellido=" + primer_apellido +
+                ", segundo_apellido=" + segundo_apellido +
+                ", direccion_calle=" + direccion_calle +
+                ", codigo_postal=" + codigo_postal +
+                ", email=" + email +
+                ", telefono_fijo=" + telefono_fijo +
+                ", telefono_movil=" + telefono_movil +
+                ", fecha_nac=" + fecha_nac +
+                ", observaciones=" + observaciones +
+                ", patologias=" + patologias +
+                '}';
+    }
 }

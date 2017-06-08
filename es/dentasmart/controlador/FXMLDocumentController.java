@@ -38,52 +38,8 @@ public class FXMLDocumentController implements Initializable {
 
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        
-          /*  ConectarSQlite();
-            try{
-            PacienteDAO pDao = new SQLitePacienteDAO(conn);
-            ObservableList<Paciente> pacientes = pDao.obtenerTodos();
-            for (Paciente p: pacientes){
-                System.out.println(p);
-            }
-            Paciente paciente =new Paciente();
-            paciente.setNombrePaciente("Ana");
-            paciente.setDniPaciente("42564987f");
-            paciente.setPrimerApellido("Perez");
-            paciente.setSegundoApellido("Alamo");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-M-yyyy");
-            paciente.setFechaNac(LocalDate.parse("2-12-2000", formatter));
-            pDao.insertar(paciente);
-            
-            } catch (DAOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-                     if(conn != null){
-                         try {
-                             conn.close();
-                         } catch (SQLException ex) {
-                             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-                     }
-                     }   */
-/*
-        //nueva prueba con daomanager
-        SQLiteDaoManager man = null;
-        man = new SQLiteDaoManager();
-
-        ObservableList<Paciente> pacientes = null;
-        try {
-            pacientes = man.getPacienteDAO().obtenerTodos();
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-        for (Paciente p : pacientes) {
-            System.out.println(p);
-        }*/
 
         try {
             //Creamos un objeto listview con la configuracion del panelMenuPrincipal y lo insertamos en el drawer
@@ -99,8 +55,6 @@ public class FXMLDocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }
 
     /**
@@ -130,8 +84,6 @@ public class FXMLDocumentController implements Initializable {
      */
     private void funcionalidadMenu() throws IOException {
 
-
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/dentasmart/vista/FXMLPanelMenuPrincipal.fxml"));
         loader.load();
         //FXMLPanelMenuPrincipalController controlerPanelPrincipal = loader.getController();
@@ -158,16 +110,12 @@ public class FXMLDocumentController implements Initializable {
                             pane = FXMLLoader.load(getClass().getResource("/es/dentasmart/vista/FXMLPanelAgenda.fxml"));
                             anchorCentral.getChildren().setAll(pane);
                             break;
-
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         });
-
     }
-
 
 }

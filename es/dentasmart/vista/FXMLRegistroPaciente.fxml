@@ -70,7 +70,7 @@
                               <JFXTextField fx:id="apellido1Txt" focusColor="#0095a7" labelFloat="true" promptText="Primer Apellido" />
                               <JFXTextField fx:id="apellido2Txt" focusColor="#0095a7" labelFloat="true" promptText="Segundo Apellido" />
                               <JFXTextField fx:id="direccionTxt" focusColor="#0095a7" labelFloat="true" promptText="Dirección" />
-                              <JFXTextField fx:id="localidad" focusColor="#0095a7" labelFloat="true" promptText="Localidad" />
+                              <JFXTextField fx:id="localidadTxt" focusColor="#0095a7" labelFloat="true" promptText="Localidad" />
                               <JFXTextField fx:id="codPostalTxt" focusColor="#0095a7" labelFloat="true" promptText="Código postal" />
                               <JFXTextField fx:id="tfnoFijoTxt" focusColor="#0095a7" labelFloat="true" promptText="Tfno. Fijo" />
                               <JFXTextField fx:id="tfnoMovilTxt" focusColor="#0095a7" labelFloat="true" promptText="Tfno. Móvil" />
@@ -90,6 +90,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </JFXTextField>
+                              <JFXTextField fx:id="idPacienteTxt" focusColor="#0095a7" labelFloat="true" layoutX="21.0" layoutY="186.0" promptText="Numero de Ficha" />
                               <Label text="Fecha de nacimiento:" textFill="#aeaeae" />
                               <JFXDatePicker fx:id="fechaNacTxt" />
                               <JFXTextField fx:id="patologiasTxt" focusColor="#0095a7" labelFloat="true" promptText="Patologías" />
@@ -127,9 +128,9 @@
                               <Separator prefHeight="105.0" prefWidth="277.0" />
                               <HBox spacing="5.0">
                                  <children>
-                                    <JFXButton fx:id="btnGuardar" buttonType="RAISED" prefHeight="35.0" prefWidth="125.0" text="Guardar" />
-                                    <JFXButton fx:id="btnEditar" buttonType="RAISED" layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="125.0" text="Editar" />
-                                    <JFXButton fx:id="btnLimpiar" buttonType="RAISED" layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="125.0" text="Limpiar" />
+                                    <JFXButton fx:id="btnGuardar" buttonType="RAISED" onAction="#guardarPaciente" prefHeight="35.0" prefWidth="125.0" text="Guardar" />
+                                    <JFXButton fx:id="btnEditar" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#editarPaciente" prefHeight="35.0" prefWidth="125.0" text="Editar" />
+                                    <JFXButton fx:id="btnLimpiar" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#eliminarPaciente" prefHeight="35.0" prefWidth="125.0" text="Limpiar" />
                                  </children>
                               </HBox>
                            </children>

@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -54,14 +55,10 @@ public class FXMLpanelPacienteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         cargarTablaPacientes();
         busqueda();
         getPacienteSeleccionado();
-
     }
-
-
 
     @FXML
     void nuevoPaciente(ActionEvent event) throws IOException {
@@ -73,7 +70,6 @@ public class FXMLpanelPacienteController implements Initializable {
         panelRegistro.setTitle("Gestión de Pacientes");
         panelRegistro.setScene(new Scene(root1));
         panelRegistro.show();
-
     }
 
     @FXML
@@ -88,9 +84,7 @@ public class FXMLpanelPacienteController implements Initializable {
                 abrirVentanaEdicion();
             }
         }
-
     }
-
 
     private void busqueda(){
 
@@ -118,7 +112,7 @@ public class FXMLpanelPacienteController implements Initializable {
         nombrePaciente.setCellValueFactory(cellData -> cellData.getValue().getValue().NombrePacienteProperty());
 
         JFXTreeTableColumn<Paciente, String> primerApellido = new JFXTreeTableColumn<>("Primer apellido");
-        primerApellido.setPrefWidth(120);
+        primerApellido.setPrefWidth(110);
         primerApellido.setCellValueFactory(cellData -> cellData.getValue().getValue().PrimerApellidoProperty());
 
         JFXTreeTableColumn<Paciente, String> segundoApellido = new JFXTreeTableColumn<>("Segundo apellido");
@@ -126,16 +120,23 @@ public class FXMLpanelPacienteController implements Initializable {
         segundoApellido.setCellValueFactory(cellData -> cellData.getValue().getValue().SegundoApellidoProperty());
 
         JFXTreeTableColumn<Paciente, LocalDate> fechaNac = new JFXTreeTableColumn<>("Fecha nacimiento");
-        fechaNac.setPrefWidth(120);
+        fechaNac.setPrefWidth(100);
         fechaNac.setCellValueFactory(cellData -> cellData.getValue().getValue().FechaNacProperty());
 
         JFXTreeTableColumn<Paciente, String> tfnoFijo = new JFXTreeTableColumn<>("Tfno. Fijo");
-        tfnoFijo.setPrefWidth(120);
+        tfnoFijo.setPrefWidth(90);
         tfnoFijo.setCellValueFactory(cellData -> cellData.getValue().getValue().TelefonoFijoProperty());
 
-        SQLiteDaoManager man = null;
-        man = new SQLiteDaoManager();
+        JFXTreeTableColumn<Paciente, String> tfnoMovil = new JFXTreeTableColumn<>("Tfno. Móvil");
+        tfnoMovil.setPrefWidth(90);
+        tfnoMovil.setCellValueFactory(cellData -> cellData.getValue().getValue().TelefonoMovilProperty());
 
+        JFXTreeTableColumn<Paciente, String> email = new JFXTreeTableColumn<>("Email");
+        email.setPrefWidth(200);
+        email.setCellValueFactory(cellData -> cellData.getValue().getValue().emailProperty());
+
+        SQLiteDaoManager man;
+        man = new SQLiteDaoManager();
 
         try {
             pacientes = man.getPacienteDAO().obtenerTodos();
@@ -143,8 +144,8 @@ public class FXMLpanelPacienteController implements Initializable {
             e.printStackTrace();
         }
 
-        final TreeItem<Paciente> root = new RecursiveTreeItem<Paciente>(pacientes, RecursiveTreeObject::getChildren);
-        tablaPaciente.getColumns().setAll(idPaciente, dni, nombrePaciente, primerApellido, segundoApellido, fechaNac, tfnoFijo);
+        final TreeItem<Paciente> root = new RecursiveTreeItem<>(pacientes, RecursiveTreeObject::getChildren);
+        tablaPaciente.getColumns().setAll(idPaciente, dni, nombrePaciente, primerApellido, segundoApellido, fechaNac, tfnoFijo, tfnoMovil, email);
         tablaPaciente.setRoot(root);
         tablaPaciente.setShowRoot(false);
     }
@@ -154,7 +155,7 @@ public class FXMLpanelPacienteController implements Initializable {
             if (newValue != null)
                 System.out.println(newValue.getValue());
             pacienteSeleccionado = newValue.getValue();
-            System.out.println("el paciente seleccionado es: " + pacienteSeleccionado + "\nel nombre es: "+ pacienteSeleccionado.getNombrePaciente());
+            System.out.println("el paciente seleccionado es: " + pacienteSeleccionado + "\nel id es: "+ pacienteSeleccionado.getIdPaciente());
 
         });
         return pacienteSeleccionado;
@@ -166,7 +167,7 @@ public class FXMLpanelPacienteController implements Initializable {
             Parent root1 = fxmlLoader.load();
             Stage panelRegistro = new Stage();
             FXMLRegistroPacienteController controller = fxmlLoader.getController();
-            controller.setPacienteSeleccionado(pacienteSeleccionado);
+            controller.setPacienteSeleccionado((getPacienteSeleccionado()));//Cargo el paciente seleccionado de la tabla en RegistroPaciente.
             panelRegistro.initModality(Modality.APPLICATION_MODAL);
             panelRegistro.setTitle("Gestión de Pacientes");
             panelRegistro.setScene(new Scene(root1));

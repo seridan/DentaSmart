@@ -49,13 +49,8 @@ public class SQLiteDaoManager implements DAOManager {
         } catch (SQLException e) {
             throw new RuntimeException("Conexion fallida");
         }
-
     }
 
-   /* public SQLiteDaoManager() throws SQLException {
-        //conn = DriverManager.getConnection("jdbc:sqlite:DentasmartDb.sqlite");
-
-    }*/
 
     @Override
     public PacienteDAO getPacienteDAO() {

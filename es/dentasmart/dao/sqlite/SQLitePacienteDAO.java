@@ -22,8 +22,8 @@ import javafx.collections.ObservableList;
  */
 public class SQLitePacienteDAO implements PacienteDAO {
 
-    final String INSERT = "INSERT INTO paciente(nombre, dni, primer_apellido, segundo_apellido, fecha_nac) VALUES(?, ?, ?, ?, ?)";
-    final String UPDATE = "UPDATE pacientes SET nombre = ?, dni = ?, primer_apellido = ?, segundo_apellido = ?, fecha_nac = ?";
+    final String INSERT = "INSERT INTO paciente(nombre, dni_paciente, primer_apellido, segundo_apellido, fecha_nac, direccion_calle, localidad, codigo_postal, email, telefono_fijo, telefono_movil, observaciones, patologias) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    final String UPDATE = "UPDATE paciente SET nombre = ?, dni_paciente = ?, primer_apellido = ?, segundo_apellido = ?, fecha_nac = ?, direccion_calle = ?, localidad = ?, codigo_postal = ?, email = ?, telefono_fijo = ?, telefono_movil = ?, observaciones = ?, patologias = ?";
     final String DELETE = "DELETE FROM paciente WHERE id_paciente = ?";
     final String GETALL = "SELECT * FROM paciente";
     final String GETONE = "SELECT * FROM paciente WHERE id_paciente = ?";
@@ -46,6 +46,14 @@ public class SQLitePacienteDAO implements PacienteDAO {
             pstat.setString(3, p.getPrimerApellido());
             pstat.setString(4, p.getSegundoApellido());
             pstat.setString(5, (p.getFechaNac()).toString());
+            pstat.setString(6, p.getDireccionCalle());
+            pstat.setString(7, p.getLocalidad());
+            pstat.setString(8, String.valueOf(p.getCodigoPostal()));
+            pstat.setString(9, p.getEmail());
+            pstat.setString(10, p.getTelefonoFijo());
+            pstat.setString(11, p.getTelefonoMovil());
+            pstat.setString(12, p.getObservaciones());
+            pstat.setString(13, p.getPatologias());
             
             if (pstat.executeUpdate() == 0) {
                 throw new DAOException("Error al guardar");
@@ -87,6 +95,14 @@ public class SQLitePacienteDAO implements PacienteDAO {
             pstat.setString(3, p.getPrimerApellido());
             pstat.setString(4, p.getSegundoApellido());
             pstat.setString(5, (p.getFechaNac()).toString());
+            pstat.setString(6, p.getDireccionCalle());
+            pstat.setString(7, p.getLocalidad());
+            pstat.setString(8, String.valueOf(p.getCodigoPostal()));
+            pstat.setString(9, p.getEmail());
+            pstat.setString(10, p.getTelefonoFijo());
+            pstat.setString(11, p.getTelefonoMovil());
+            pstat.setString(12, p.getObservaciones());
+            pstat.setString(13, p.getPatologias());
             if (pstat.executeUpdate() == 0);
             {
                 throw new DAOException("Error al actualizar");
@@ -132,10 +148,18 @@ public class SQLitePacienteDAO implements PacienteDAO {
         Paciente paciente = new Paciente();
         paciente.setIdPaciente(rs.getInt("id_paciente"));
         paciente.setNombrePaciente(rs.getString("nombre"));
-        paciente.setDniPaciente(rs.getString("dni"));
+        paciente.setDniPaciente(rs.getString("dni_paciente"));
         paciente.setPrimerApellido(rs.getString("primer_apellido"));
         paciente.setSegundoApellido(rs.getString("segundo_apellido"));
         paciente.setFechaNac(LocalDate.parse(rs.getString("fecha_nac")));
+        paciente.setDireccionCalle(rs.getString("direccion_calle"));
+        paciente.setLocalidad(rs.getString("localidad"));
+        paciente.setCodigoPostal(rs.getInt("codigo_postal"));
+        paciente.setEmail(rs.getString("email"));
+        paciente.setTelefonoFijo(rs.getString("telefono_fijo"));
+        paciente.setTelefonoMovil(rs.getString("telefono_movil"));
+        paciente.setObservaciones(rs.getString("observaciones"));
+        paciente.setPatologias(rs.getString("patologias"));
         return paciente;
 
     }
@@ -176,7 +200,7 @@ public class SQLitePacienteDAO implements PacienteDAO {
     public Paciente obtenerUno(Integer id) throws DAOException {
         PreparedStatement pstat = null;
         ResultSet rs = null;
-        Paciente p = null;
+        Paciente p;
         try {
             pstat = conn.prepareStatement(GETONE);
             pstat.setInt(1, id);

@@ -4,7 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
+import es.dentasmart.dao.DAOException;
+import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.modelo.Paciente;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
@@ -12,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -70,6 +74,12 @@ public class FXMLRegistroPacienteController implements Initializable {
     @FXML
     private SplitPane splitPane;
 
+    @FXML
+    private JFXTextField idPacienteTxt;
+
+    SQLiteDaoManager man;
+    Paciente pSeleccionado;
+
 
 
     @Override
@@ -77,24 +87,44 @@ public class FXMLRegistroPacienteController implements Initializable {
 
         //Da formato de 24h. al timePicker
         horaCitaTxt._24HourViewProperty().setValue(true);
-
+        man = new SQLiteDaoManager();
     }
 
-    public void setPacienteSeleccionado(Paciente pacienteSeleccionado){
 
+    public void setPacienteSeleccionado(Paciente pacienteSeleccionado) {
+
+        idPacienteTxt.setText(String.valueOf(pacienteSeleccionado.getIdPaciente()));
         dniTxt.setText(pacienteSeleccionado.getDniPaciente());
         nombreTxt.setText(pacienteSeleccionado.getNombrePaciente());
         apellido1Txt.setText(pacienteSeleccionado.getPrimerApellido());
         apellido2Txt.setText(pacienteSeleccionado.getSegundoApellido());
-        //direccionTxt.setText(pacienteSeleccionado.getDireccionCalle());
-        //localidadTxt.setText(pacienteSeleccionado.getLocalidad());
-        //codPostalTxt.setText(String.valueOf(pacienteSeleccionado.getCodigoPostal()));
-        //tfnoFijoTxt.setText(pacienteSeleccionado.getTelefonoFijo());
-        //tfnoMovilTxt.setText(pacienteSeleccionado.getTelefonoMovil());
-        //emailTxt.setText(pacienteSeleccionado.getEmail());
+        direccionTxt.setText(pacienteSeleccionado.getDireccionCalle());
+        localidadTxt.setText(pacienteSeleccionado.getLocalidad());
+        codPostalTxt.setText(String.valueOf(pacienteSeleccionado.getCodigoPostal()));
+        tfnoFijoTxt.setText(pacienteSeleccionado.getTelefonoFijo());
+        tfnoMovilTxt.setText(pacienteSeleccionado.getTelefonoMovil());
+        emailTxt.setText(pacienteSeleccionado.getEmail());
         fechaNacTxt.setValue(pacienteSeleccionado.getFechaNac());
+    }
 
+
+    @FXML
+    void editarPaciente(ActionEvent event) throws DAOException {
+
+        try {
+            man.getPacienteDAO().modificar(pSeleccionado);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void eliminarPaciente(ActionEvent event) {
 
     }
 
+    @FXML
+    void guardarPaciente(ActionEvent event) {
+
+    }
 }
