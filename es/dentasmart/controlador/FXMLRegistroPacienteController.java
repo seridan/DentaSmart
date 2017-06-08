@@ -1,9 +1,6 @@
 package es.dentasmart.controlador;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTimePicker;
+import com.jfoenix.controls.*;
 import es.dentasmart.dao.DAOException;
 import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.modelo.Paciente;
@@ -66,6 +63,9 @@ public class FXMLRegistroPacienteController implements Initializable {
     private JFXButton btnLimpiar;
 
     @FXML
+    private JFXTextField patologiasTxt;
+
+    @FXML
     private JFXDatePicker fechaCitaTxt;
 
     @FXML
@@ -77,8 +77,11 @@ public class FXMLRegistroPacienteController implements Initializable {
     @FXML
     private JFXTextField idPacienteTxt;
 
+    @FXML
+    private JFXTextArea observacionesTex;
+
     SQLiteDaoManager man;
-    Paciente pSeleccionado;
+    Paciente pacienteToEdit;
 
 
 
@@ -111,11 +114,11 @@ public class FXMLRegistroPacienteController implements Initializable {
     @FXML
     void editarPaciente(ActionEvent event) throws DAOException {
 
-        try {
+       /* try {
             man.getPacienteDAO().modificar(pSeleccionado);
         } catch (DAOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -126,5 +129,23 @@ public class FXMLRegistroPacienteController implements Initializable {
     @FXML
     void guardarPaciente(ActionEvent event) {
 
+    }
+
+    private void getPacienteFromTextField(){
+        //pacienteToEdit.setIdPaciente(Integer.parseInt(String.valueOf(idPacienteTxt.getText())));
+        pacienteToEdit.setIdPaciente(Integer.parseInt(idPacienteTxt.getText()));
+        pacienteToEdit.setDniPaciente(dniTxt.getText());
+        pacienteToEdit.setNombrePaciente(nombreTxt.getText());
+        pacienteToEdit.setPrimerApellido(apellido1Txt.getText());
+        pacienteToEdit.setSegundoApellido(apellido2Txt.getText());
+        pacienteToEdit.setDireccionCalle(direccionTxt.getText());
+        pacienteToEdit.setLocalidad(localidadTxt.getText());
+        pacienteToEdit.setCodigoPostal(Integer.parseInt(codPostalTxt.getText()));
+        pacienteToEdit.setTelefonoFijo(tfnoFijoTxt.getText());
+        pacienteToEdit.setTelefonoMovil(tfnoMovilTxt.getText());
+        pacienteToEdit.setEmail(emailTxt.getText());
+        pacienteToEdit.setFechaNac(fechaNacTxt.getValue());
+        pacienteToEdit.setPatologias(patologiasTxt.getText());
+        pacienteToEdit.setObservaciones(observacionesTex.getText());
     }
 }
