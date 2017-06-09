@@ -122,7 +122,11 @@ public class FXMLRegistroPacienteController implements Initializable {
     }
 
     @FXML
-    void eliminarPaciente(ActionEvent event) {
+    void eliminarPaciente(ActionEvent event) throws DAOException {
+
+        pacienteToEdit = new Paciente();
+        pacienteToEdit.setIdPaciente(Integer.parseInt(idPacienteTxt.getText()));
+        man.getPacienteDAO().eliminar(pacienteToEdit);
 
     }
 
