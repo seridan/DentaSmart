@@ -114,30 +114,32 @@ public class FXMLRegistroPacienteController implements Initializable {
     @FXML
     void editarPaciente(ActionEvent event) throws DAOException {
 
-       /* try {
-            man.getPacienteDAO().modificar(pSeleccionado);
+       try {
+           getPacienteFromTextField();
+           System.out.println("este es el pacienteToEdit " + pacienteToEdit);
+            man.getPacienteDAO().modificar(pacienteToEdit);
         } catch (DAOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
-    @FXML
-    void eliminarPaciente(ActionEvent event) throws DAOException {
 
-        pacienteToEdit = new Paciente();
-        pacienteToEdit.setIdPaciente(Integer.parseInt(idPacienteTxt.getText()));
-        man.getPacienteDAO().eliminar(pacienteToEdit);
-
-    }
 
     @FXML
-    void guardarPaciente(ActionEvent event) {
+    void guardarPaciente(ActionEvent event) throws DAOException {
 
+        getPacienteFromTextField();
+        try {
+            man.getPacienteDAO().insertar(pacienteToEdit);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getPacienteFromTextField(){
         //pacienteToEdit.setIdPaciente(Integer.parseInt(String.valueOf(idPacienteTxt.getText())));
-        pacienteToEdit.setIdPaciente(Integer.parseInt(idPacienteTxt.getText()));
+        pacienteToEdit = new Paciente();
+        pacienteToEdit.setIdPaciente((Integer.parseInt(idPacienteTxt.getText())));
         pacienteToEdit.setDniPaciente(dniTxt.getText());
         pacienteToEdit.setNombrePaciente(nombreTxt.getText());
         pacienteToEdit.setPrimerApellido(apellido1Txt.getText());

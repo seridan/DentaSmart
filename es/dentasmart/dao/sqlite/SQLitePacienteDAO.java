@@ -23,7 +23,7 @@ import javafx.collections.ObservableList;
 public class SQLitePacienteDAO implements PacienteDAO {
 
     final String INSERT = "INSERT INTO paciente(nombre, dni_paciente, primer_apellido, segundo_apellido, fecha_nac, direccion_calle, localidad, codigo_postal, email, telefono_fijo, telefono_movil, observaciones, patologias) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    final String UPDATE = "UPDATE paciente SET nombre = ?, dni_paciente = ?, primer_apellido = ?, segundo_apellido = ?, fecha_nac = ?, direccion_calle = ?, localidad = ?, codigo_postal = ?, email = ?, telefono_fijo = ?, telefono_movil = ?, observaciones = ?, patologias = ?";
+    final String UPDATE = "UPDATE paciente SET nombre = ?, dni_paciente = ?, primer_apellido = ?, segundo_apellido = ?, fecha_nac = ?, direccion_calle = ?, localidad = ?, codigo_postal = ?, email = ?, telefono_fijo = ?, telefono_movil = ?, observaciones = ?, patologias = ? WHERE id_paciente = ?";
     final String DELETE = "DELETE FROM paciente WHERE id_paciente = ?";
     final String GETALL = "SELECT * FROM paciente";
     final String GETONE = "SELECT * FROM paciente WHERE id_paciente = ?";
@@ -97,15 +97,17 @@ public class SQLitePacienteDAO implements PacienteDAO {
             pstat.setString(5, (p.getFechaNac()).toString());
             pstat.setString(6, p.getDireccionCalle());
             pstat.setString(7, p.getLocalidad());
-            pstat.setString(8, String.valueOf(p.getCodigoPostal()));
+            pstat.setInt(8, p.getCodigoPostal());
             pstat.setString(9, p.getEmail());
             pstat.setString(10, p.getTelefonoFijo());
             pstat.setString(11, p.getTelefonoMovil());
             pstat.setString(12, p.getObservaciones());
             pstat.setString(13, p.getPatologias());
+            pstat.setInt(14, p.getIdPaciente());
             if (pstat.executeUpdate() == 0);
             {
-                throw new DAOException("Error al actualizar");
+                System.out.println("el resultado del executeUpdate es: "+ pstat.executeUpdate());
+                //throw new DAOException("Error al actualizar");
             }
         } catch (SQLException ex) {
             throw new DAOException("Error en SQL", ex);
@@ -126,10 +128,9 @@ public class SQLitePacienteDAO implements PacienteDAO {
         try {
             pstat = conn.prepareStatement(DELETE);
             pstat.setInt(1, p.getIdPaciente());
-
             if (pstat.executeUpdate() == 0);
             {
-                throw new DAOException("Error al eliminar");
+                //throw new DAOException("Error al eliminar");
             }
         } catch (SQLException ex) {
             throw new DAOException("Error en SQL", ex);

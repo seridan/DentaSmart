@@ -51,6 +51,7 @@ public class FXMLpanelPacienteController implements Initializable {
 
     ObservableList<Paciente> pacientes = null;
     Paciente pacienteSeleccionado = null;
+    SQLiteDaoManager man;
 
 
     @Override
@@ -75,6 +76,15 @@ public class FXMLpanelPacienteController implements Initializable {
     @FXML
     void editarPaciente(ActionEvent event) throws IOException {
         abrirVentanaEdicion();
+    }
+
+    @FXML
+    void eliminarPaciente(ActionEvent event) throws DAOException {
+
+
+        System.out.println("este es el pacienteToEdit para eliminar " + pacienteSeleccionado);
+        man.getPacienteDAO().eliminar(pacienteSeleccionado);
+
     }
 
     @FXML
@@ -135,7 +145,7 @@ public class FXMLpanelPacienteController implements Initializable {
         email.setPrefWidth(200);
         email.setCellValueFactory(cellData -> cellData.getValue().getValue().emailProperty());
 
-        SQLiteDaoManager man;
+
         man = new SQLiteDaoManager();
 
         try {
