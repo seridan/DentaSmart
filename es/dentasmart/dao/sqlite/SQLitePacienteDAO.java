@@ -104,7 +104,7 @@ public class SQLitePacienteDAO implements PacienteDAO {
             pstat.setString(12, p.getObservaciones());
             pstat.setString(13, p.getPatologias());
             pstat.setInt(14, p.getIdPaciente());
-            if (pstat.executeUpdate() == 0);
+            if (pstat.execute());
             {
                 System.out.println("el resultado del executeUpdate es: "+ pstat.executeUpdate());
                 //throw new DAOException("Error al actualizar");

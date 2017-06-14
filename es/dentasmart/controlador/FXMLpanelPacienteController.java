@@ -20,11 +20,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,6 +61,7 @@ public class FXMLpanelPacienteController implements Initializable {
         cargarTablaPacientes();
         busqueda();
         getPacienteSeleccionado();
+        //tablaPaciente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> cargarTablaPacientes());
     }
 
     @FXML
@@ -84,7 +87,7 @@ public class FXMLpanelPacienteController implements Initializable {
 
         System.out.println("este es el pacienteToEdit para eliminar " + pacienteSeleccionado);
         man.getPacienteDAO().eliminar(pacienteSeleccionado);
-
+        pacientes.remove(pacienteSeleccionado);
     }
 
     @FXML
@@ -141,10 +144,18 @@ public class FXMLpanelPacienteController implements Initializable {
         tfnoMovil.setPrefWidth(90);
         tfnoMovil.setCellValueFactory(cellData -> cellData.getValue().getValue().TelefonoMovilProperty());
 
+        //JFXTreeTableColumn<Paciente, String> email = new JFXTreeTableColumn<>("Email");
+       // email.setPrefWidth(200);
+        //email.setCellValueFactory(cellData -> cellData.getValue().getValue().emailProperty());
+
         JFXTreeTableColumn<Paciente, String> email = new JFXTreeTableColumn<>("Email");
         email.setPrefWidth(200);
-        email.setCellValueFactory(cellData -> cellData.getValue().getValue().emailProperty());
-
+        email.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Paciente, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Paciente, String> param) {
+                return param.getValue().getValue().emailProperty();
+            }
+        });
 
         man = new SQLiteDaoManager();
 
@@ -158,6 +169,8 @@ public class FXMLpanelPacienteController implements Initializable {
         tablaPaciente.getColumns().setAll(idPaciente, dni, nombrePaciente, primerApellido, segundoApellido, fechaNac, tfnoFijo, tfnoMovil, email);
         tablaPaciente.setRoot(root);
         tablaPaciente.setShowRoot(false);
+
+
     }
 
     private Paciente getPacienteSeleccionado(){
@@ -177,6 +190,7 @@ public class FXMLpanelPacienteController implements Initializable {
             Parent root1 = fxmlLoader.load();
             Stage panelRegistro = new Stage();
             FXMLRegistroPacienteController controller = fxmlLoader.getController();
+            controller.setListaPacientes(pacientes);
             controller.setPacienteSeleccionado((getPacienteSeleccionado()));//Cargo el paciente seleccionado de la tabla en RegistroPaciente.
             panelRegistro.initModality(Modality.APPLICATION_MODAL);
             panelRegistro.setTitle("Gestión de Pacientes");

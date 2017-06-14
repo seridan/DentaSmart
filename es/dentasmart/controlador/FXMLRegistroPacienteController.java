@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import es.dentasmart.dao.DAOException;
 import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.modelo.Paciente;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -82,6 +84,9 @@ public class FXMLRegistroPacienteController implements Initializable {
 
     SQLiteDaoManager man;
     Paciente pacienteToEdit;
+    private ObservableList<Paciente> listaPacientes;
+    int indexPacienteSelec;
+    Paciente pacienteSeleccionado;
 
 
 
@@ -93,9 +98,14 @@ public class FXMLRegistroPacienteController implements Initializable {
         man = new SQLiteDaoManager();
     }
 
+    public void setListaPacientes(ObservableList<Paciente> listaPacientes){
+
+        this.listaPacientes = listaPacientes;
+    }
+
 
     public void setPacienteSeleccionado(Paciente pacienteSeleccionado) {
-
+        this.pacienteSeleccionado = pacienteSeleccionado;
         idPacienteTxt.setText(String.valueOf(pacienteSeleccionado.getIdPaciente()));
         dniTxt.setText(pacienteSeleccionado.getDniPaciente());
         nombreTxt.setText(pacienteSeleccionado.getNombrePaciente());
@@ -117,7 +127,11 @@ public class FXMLRegistroPacienteController implements Initializable {
        try {
            getPacienteFromTextField();
            System.out.println("este es el pacienteToEdit " + pacienteToEdit);
-            man.getPacienteDAO().modificar(pacienteToEdit);
+           man.getPacienteDAO().modificar(pacienteToEdit);
+           listaPacientes.set(listaPacientes.indexOf(pacienteSeleccionado), pacienteToEdit);
+           //listaPacientes.add(pacienteToEdit);
+
+           System.out.println("el indice del objeto a editar es: " +listaPacientes.indexOf(pacienteToEdit));
         } catch (DAOException e) {
             e.printStackTrace();
         }
