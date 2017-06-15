@@ -8,8 +8,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.net.URL;
@@ -131,6 +133,7 @@ public class FXMLRegistroPacienteController implements Initializable {
            listaPacientes.set(listaPacientes.indexOf(pacienteSeleccionado), pacienteToEdit);
            //listaPacientes.add(pacienteToEdit);
 
+           cerrarVentana(event);
            System.out.println("el indice del objeto a editar es: " +listaPacientes.indexOf(pacienteToEdit));
         } catch (DAOException e) {
             e.printStackTrace();
@@ -145,7 +148,10 @@ public class FXMLRegistroPacienteController implements Initializable {
         getPacienteFromTextField();
         try {
             man.getPacienteDAO().insertar(pacienteToEdit);
-        } catch (DAOException e) {
+            System.out.println("este es el paciente nuevo " + pacienteToEdit);
+            //listaPacientes.add(pacienteToEdit);
+            cerrarVentana(event);
+            } catch (DAOException e) {
             e.printStackTrace();
         }
     }
@@ -153,19 +159,26 @@ public class FXMLRegistroPacienteController implements Initializable {
     private void getPacienteFromTextField(){
         //pacienteToEdit.setIdPaciente(Integer.parseInt(String.valueOf(idPacienteTxt.getText())));
         pacienteToEdit = new Paciente();
-        pacienteToEdit.setIdPaciente((Integer.parseInt(idPacienteTxt.getText())));
+       // pacienteToEdit.setIdPaciente((Integer.parseInt(idPacienteTxt.getText())));
         pacienteToEdit.setDniPaciente(dniTxt.getText());
         pacienteToEdit.setNombrePaciente(nombreTxt.getText());
         pacienteToEdit.setPrimerApellido(apellido1Txt.getText());
         pacienteToEdit.setSegundoApellido(apellido2Txt.getText());
         pacienteToEdit.setDireccionCalle(direccionTxt.getText());
         pacienteToEdit.setLocalidad(localidadTxt.getText());
-        pacienteToEdit.setCodigoPostal(Integer.parseInt(codPostalTxt.getText()));
+        pacienteToEdit.setCodigoPostal(Integer.parseInt(String.valueOf(codPostalTxt.getText())));
         pacienteToEdit.setTelefonoFijo(tfnoFijoTxt.getText());
         pacienteToEdit.setTelefonoMovil(tfnoMovilTxt.getText());
         pacienteToEdit.setEmail(emailTxt.getText());
         pacienteToEdit.setFechaNac(fechaNacTxt.getValue());
         pacienteToEdit.setPatologias(patologiasTxt.getText());
         pacienteToEdit.setObservaciones(observacionesTex.getText());
+    }
+
+    private void cerrarVentana(ActionEvent event){
+        Node node = (Node)event.getSource();
+        Stage stage = (Stage)node.getScene().getWindow();
+        stage.close();
+
     }
 }

@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
  */
 public class SQLitePacienteDAO implements PacienteDAO {
 
-    final String INSERT = "INSERT INTO paciente(nombre, dni_paciente, primer_apellido, segundo_apellido, fecha_nac, direccion_calle, localidad, codigo_postal, email, telefono_fijo, telefono_movil, observaciones, patologias) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    final String INSERT = "INSERT INTO paciente(nombre, primer_apellido, segundo_apellido, fecha_nac, direccion_calle, localidad, codigo_postal, email, telefono_fijo, telefono_movil, observaciones, patologias, dni_paciente) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     final String UPDATE = "UPDATE paciente SET nombre = ?, dni_paciente = ?, primer_apellido = ?, segundo_apellido = ?, fecha_nac = ?, direccion_calle = ?, localidad = ?, codigo_postal = ?, email = ?, telefono_fijo = ?, telefono_movil = ?, observaciones = ?, patologias = ? WHERE id_paciente = ?";
     final String DELETE = "DELETE FROM paciente WHERE id_paciente = ?";
     final String GETALL = "SELECT * FROM paciente";
@@ -42,18 +42,18 @@ public class SQLitePacienteDAO implements PacienteDAO {
         try {
             pstat = conn.prepareStatement(INSERT);
             pstat.setString(1, p.getNombrePaciente());
-            pstat.setString(2, p.getDniPaciente());
-            pstat.setString(3, p.getPrimerApellido());
-            pstat.setString(4, p.getSegundoApellido());
-            pstat.setString(5, (p.getFechaNac()).toString());
-            pstat.setString(6, p.getDireccionCalle());
-            pstat.setString(7, p.getLocalidad());
-            pstat.setString(8, String.valueOf(p.getCodigoPostal()));
-            pstat.setString(9, p.getEmail());
-            pstat.setString(10, p.getTelefonoFijo());
-            pstat.setString(11, p.getTelefonoMovil());
-            pstat.setString(12, p.getObservaciones());
-            pstat.setString(13, p.getPatologias());
+            pstat.setString(2, p.getPrimerApellido());
+            pstat.setString(3, p.getSegundoApellido());
+            pstat.setString(4, (p.getFechaNac()).toString());
+            pstat.setString(5, p.getDireccionCalle());
+            pstat.setString(6, p.getLocalidad());
+            pstat.setString(7, String.valueOf(p.getCodigoPostal()));
+            pstat.setString(8, p.getEmail());
+            pstat.setString(9, p.getTelefonoFijo());
+            pstat.setString(10, p.getTelefonoMovil());
+            pstat.setString(11, p.getObservaciones());
+            pstat.setString(12, p.getPatologias());
+            pstat.setString(13, p.getDniPaciente());
             
             if (pstat.executeUpdate() == 0) {
                 throw new DAOException("Error al guardar");
@@ -61,12 +61,13 @@ public class SQLitePacienteDAO implements PacienteDAO {
             rs = pstat.getGeneratedKeys();
             if (rs.next()) {
                 p.setIdPaciente(rs.getInt(1));
+                System.out.println("el id del paciente generado es " + p.getIdPaciente());
             } else {
                 throw new DAOException("El id del paciente ya existe");
             }
 
         } catch (SQLException ex) {
-            throw new DAOException("Error en SQL", ex);
+           // throw new DAOException("Error en SQL", ex);
         } finally {
             if (rs != null) {
                 try {

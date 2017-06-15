@@ -144,18 +144,10 @@ public class FXMLpanelPacienteController implements Initializable {
         tfnoMovil.setPrefWidth(90);
         tfnoMovil.setCellValueFactory(cellData -> cellData.getValue().getValue().TelefonoMovilProperty());
 
-        //JFXTreeTableColumn<Paciente, String> email = new JFXTreeTableColumn<>("Email");
-       // email.setPrefWidth(200);
-        //email.setCellValueFactory(cellData -> cellData.getValue().getValue().emailProperty());
-
         JFXTreeTableColumn<Paciente, String> email = new JFXTreeTableColumn<>("Email");
         email.setPrefWidth(200);
-        email.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Paciente, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<Paciente, String> param) {
-                return param.getValue().getValue().emailProperty();
-            }
-        });
+        email.setCellValueFactory(cellData -> cellData.getValue().getValue().emailProperty());
+
 
         man = new SQLiteDaoManager();
 
