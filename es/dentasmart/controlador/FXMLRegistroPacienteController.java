@@ -131,7 +131,7 @@ public class FXMLRegistroPacienteController implements Initializable {
            System.out.println("este es el pacienteToEdit " + pacienteToEdit);
            man.getPacienteDAO().modificar(pacienteToEdit);
            listaPacientes.set(listaPacientes.indexOf(pacienteSeleccionado), pacienteToEdit);
-           //listaPacientes.add(pacienteToEdit);
+           listaPacientes.add(pacienteToEdit);
 
            cerrarVentana(event);
            System.out.println("el indice del objeto a editar es: " +listaPacientes.indexOf(pacienteToEdit));
@@ -149,7 +149,7 @@ public class FXMLRegistroPacienteController implements Initializable {
         try {
             man.getPacienteDAO().insertar(pacienteToEdit);
             System.out.println("este es el paciente nuevo " + pacienteToEdit);
-            //listaPacientes.add(pacienteToEdit);
+            listaPacientes.add(pacienteToEdit);
             cerrarVentana(event);
             } catch (DAOException e) {
             e.printStackTrace();

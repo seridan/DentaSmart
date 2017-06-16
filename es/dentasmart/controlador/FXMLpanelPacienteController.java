@@ -71,6 +71,8 @@ public class FXMLpanelPacienteController implements Initializable {
         Parent root1 = fxmlLoader.load();
         Stage panelRegistro = new Stage();
         panelRegistro.initModality(Modality.APPLICATION_MODAL);
+        FXMLRegistroPacienteController controller = fxmlLoader.getController();
+        controller.setListaPacientes(pacientes);
         panelRegistro.setTitle("Gestión de Pacientes");
         panelRegistro.setScene(new Scene(root1));
         panelRegistro.show();

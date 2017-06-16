@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
  */
 public class SQLitePacienteDAO implements PacienteDAO {
 
-    final String INSERT = "INSERT INTO paciente(nombre, primer_apellido, segundo_apellido, fecha_nac, direccion_calle, localidad, codigo_postal, email, telefono_fijo, telefono_movil, observaciones, patologias, dni_paciente) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    final String INSERT = "INSERT INTO paciente(nombre, primer_apellido, segundo_apellido, fecha_nac, direccion_calle, localidad, codigo_postal, email, telefono_fijo, telefono_movil, observaciones, patologias, dni_paciente) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     final String UPDATE = "UPDATE paciente SET nombre = ?, dni_paciente = ?, primer_apellido = ?, segundo_apellido = ?, fecha_nac = ?, direccion_calle = ?, localidad = ?, codigo_postal = ?, email = ?, telefono_fijo = ?, telefono_movil = ?, observaciones = ?, patologias = ? WHERE id_paciente = ?";
     final String DELETE = "DELETE FROM paciente WHERE id_paciente = ?";
     final String GETALL = "SELECT * FROM paciente";
@@ -67,7 +67,7 @@ public class SQLitePacienteDAO implements PacienteDAO {
             }
 
         } catch (SQLException ex) {
-           // throw new DAOException("Error en SQL", ex);
+            throw new DAOException("Error en SQL", ex);
         } finally {
             if (rs != null) {
                 try {
