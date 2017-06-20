@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
@@ -26,11 +27,14 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 import javafx.util.converter.DateTimeStringConverter;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import javafx.util.converter.LocalTimeStringConverter;
+import org.controlsfx.control.Notifications;
 
+import javax.management.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -56,6 +60,12 @@ public class FXMLpanelPacienteController implements Initializable {
     @FXML
     private JFXTextField txtBuscar;
 
+    @FXML
+    private JFXButton btnEditar;
+
+    @FXML
+    private JFXButton btnBorrar;
+
     ObservableList<Paciente> pacientes = null;
     Paciente pacienteSeleccionado = null;
     SQLiteDaoManager man;
@@ -67,7 +77,7 @@ public class FXMLpanelPacienteController implements Initializable {
         cargarTablaPacientes();
         busqueda();
         getPacienteSeleccionado();
-        //tablaPaciente.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> cargarTablaPacientes());
+
     }
 
     @FXML
@@ -86,17 +96,40 @@ public class FXMLpanelPacienteController implements Initializable {
 
     @FXML
     void editarPaciente(ActionEvent event) throws IOException {
-        abrirVentanaEdicion();
+        if(pacienteSeleccionado != null){
+            abrirVentanaEdicion();
+        }else{
+            Notifications notificationBuilder = Notifications.create()
+                    .title("No hay un paciente seleccionado")
+                    .text("Debe seleccionar un paciente en la tabla")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_CENTER);
+            notificationBuilder.darkStyle();
+            notificationBuilder.showWarning();
+
+
+        }
+
     }
 
     @FXML
     void eliminarPaciente(ActionEvent event) throws DAOException {
-
-
-        System.out.println("este es el pacienteToEdit para eliminar " + pacienteSeleccionado);
-        man.getPacienteDAO().eliminar(pacienteSeleccionado);
-        pacientes.remove(pacienteSeleccionado);
-    }
+        if(pacienteSeleccionado != null){
+            System.out.println("este es el pacienteToEdit para eliminar " + pacienteSeleccionado);
+            man.getPacienteDAO().eliminar(pacienteSeleccionado);
+            pacientes.remove(pacienteSeleccionado);
+        }else{
+            Notifications notificationBuilder = Notifications.create()
+                    .title("No hay un paciente seleccionado")
+                    .text("Debe seleccionar un paciente en la tabla")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_CENTER);
+            notificationBuilder.darkStyle();
+            notificationBuilder.showWarning();
+        }
+            }
 
     @FXML
     void dobleClick(MouseEvent event) throws IOException {
@@ -115,15 +148,12 @@ public class FXMLpanelPacienteController implements Initializable {
                     pacienteTreeItem.getValue().getSegundoApellido().toLowerCase().contains(newValue.toLowerCase())||
                     pacienteTreeItem.getValue().getDniPaciente().toLowerCase().contains(newValue.toLowerCase())||
                     pacienteTreeItem.getValue().IdPacienteProperty().asString().getValue().contains(newValue);
+            getPacienteSeleccionado();
             return flag;
         }));
     }
 
     private void cargarTablaPacientes(){
-        String pattern = "dd-MM-yyyy";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-        DateTimeFormatter parser = DateTimeFormatter.ofPattern("d/M/y");
-
 
         JFXTreeTableColumn<Paciente, Integer> idPaciente = new JFXTreeTableColumn<>("Id");
         idPaciente.setPrefWidth(50);
@@ -149,6 +179,8 @@ public class FXMLpanelPacienteController implements Initializable {
         fechaNac.setPrefWidth(100);
         fechaNac.setCellValueFactory(cellData -> cellData.getValue().getValue().FechaNacProperty());
         //Metodo para ajustar la fecha al formato dd-MM-aaaa
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         fechaNac.setCellFactory(column -> {
             return new JFXTreeTableCell<Paciente, LocalDate>(){
 
@@ -197,12 +229,15 @@ public class FXMLpanelPacienteController implements Initializable {
 
     private Paciente getPacienteSeleccionado(){
         tablaPaciente.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
-            if (newValue != null)
+            if (newValue != null) {
                 System.out.println(newValue.getValue());
-            pacienteSeleccionado = newValue.getValue();
-            System.out.println("el paciente seleccionado es: " + pacienteSeleccionado + "\nel id es: "+ pacienteSeleccionado.getIdPaciente());
-
+                pacienteSeleccionado = newValue.getValue();
+                System.out.println("el paciente seleccionado es: " + pacienteSeleccionado + "\nel id es: " + pacienteSeleccionado.getIdPaciente());
+                //asigno oldValue al pacienteSeleccionado cuando newValue == nul, para no tener
+                // un nullPointer al hacer la busqueda y seleccionar a otro paciente
+            }else pacienteSeleccionado = oldValue.getValue();
         });
+
         return pacienteSeleccionado;
     }
 
