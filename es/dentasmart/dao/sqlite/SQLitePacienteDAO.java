@@ -47,7 +47,7 @@ public class SQLitePacienteDAO implements PacienteDAO {
             pstat.setString(4, (p.getFechaNac()).toString());
             pstat.setString(5, p.getDireccionCalle());
             pstat.setString(6, p.getLocalidad());
-            pstat.setString(7, String.valueOf(p.getCodigoPostal()));
+            pstat.setString(7, (p.getCodigoPostal()));
             pstat.setString(8, p.getEmail());
             pstat.setString(9, p.getTelefonoFijo());
             pstat.setString(10, p.getTelefonoMovil());
@@ -98,7 +98,7 @@ public class SQLitePacienteDAO implements PacienteDAO {
             pstat.setString(5, (p.getFechaNac()).toString());
             pstat.setString(6, p.getDireccionCalle());
             pstat.setString(7, p.getLocalidad());
-            pstat.setInt(8, p.getCodigoPostal());
+            pstat.setString(8, p.getCodigoPostal());
             pstat.setString(9, p.getEmail());
             pstat.setString(10, p.getTelefonoFijo());
             pstat.setString(11, p.getTelefonoMovil());
@@ -156,7 +156,7 @@ public class SQLitePacienteDAO implements PacienteDAO {
         paciente.setFechaNac(LocalDate.parse(rs.getString("fecha_nac")));
         paciente.setDireccionCalle(rs.getString("direccion_calle"));
         paciente.setLocalidad(rs.getString("localidad"));
-        paciente.setCodigoPostal(rs.getInt("codigo_postal"));
+        paciente.setCodigoPostal(rs.getString("codigo_postal"));
         paciente.setEmail(rs.getString("email"));
         paciente.setTelefonoFijo(rs.getString("telefono_fijo"));
         paciente.setTelefonoMovil(rs.getString("telefono_movil"));

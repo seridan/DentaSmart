@@ -5,6 +5,7 @@
  */
 package es.dentasmart.modelo;
 
+import java.text.Format;
 import java.time.LocalDate;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -18,7 +19,9 @@ import javafx.beans.property.StringProperty;
  * @author seridan
  */
 public class Paciente extends RecursiveTreeObject<Paciente> {
-    //Declare Employees Table Columns
+
+
+    //Declare Pacientes Table Columns
     private final IntegerProperty id_paciente;
     private final StringProperty dni_paciente;
     private final StringProperty localidad;
@@ -26,13 +29,14 @@ public class Paciente extends RecursiveTreeObject<Paciente> {
     private final StringProperty primer_apellido;
     private final StringProperty segundo_apellido;
     private final StringProperty direccion_calle;
-    private final IntegerProperty codigo_postal;
+    private final StringProperty codigo_postal;
     private final StringProperty email;
     private final StringProperty telefono_fijo;
     private final StringProperty telefono_movil;
     private final SimpleObjectProperty<LocalDate> fecha_nac;
     private final StringProperty observaciones;
     private final StringProperty patologias;
+
 
 
     //Constructor
@@ -44,7 +48,7 @@ public class Paciente extends RecursiveTreeObject<Paciente> {
         this.segundo_apellido = new SimpleStringProperty();
         this.direccion_calle = new SimpleStringProperty();
         this.localidad = new SimpleStringProperty();
-        this.codigo_postal = new SimpleIntegerProperty();
+        this.codigo_postal = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
         this.telefono_fijo = new SimpleStringProperty();
         this.telefono_movil = new SimpleStringProperty();
@@ -147,15 +151,15 @@ public class Paciente extends RecursiveTreeObject<Paciente> {
     }
 
     //codigo_postal
-    public int getCodigoPostal() {
+    public String getCodigoPostal() {
         return codigo_postal.get();
     }
 
-    public void setCodigoPostal(int codigoPostal) {
+    public void setCodigoPostal(String codigoPostal) {
         this.codigo_postal.set(codigoPostal);
     }
 
-    public IntegerProperty CodigoPostalProperty() {
+    public StringProperty CodigoPostalProperty() {
         return codigo_postal;
     }
 

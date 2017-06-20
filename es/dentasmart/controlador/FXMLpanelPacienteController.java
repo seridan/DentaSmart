@@ -6,12 +6,11 @@
 package es.dentasmart.controlador;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.controls.cells.editors.base.JFXTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import es.dentasmart.dao.DAOException;
 import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.modelo.Paciente;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,20 +19,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TextFieldTreeCell;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import javafx.util.StringConverter;
+import javafx.util.converter.DateTimeStringConverter;
+import javafx.util.converter.LocalDateTimeStringConverter;
+import javafx.util.converter.LocalTimeStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 /**
  * FXML Controller class
@@ -54,6 +59,7 @@ public class FXMLpanelPacienteController implements Initializable {
     ObservableList<Paciente> pacientes = null;
     Paciente pacienteSeleccionado = null;
     SQLiteDaoManager man;
+
 
 
     @Override
@@ -114,6 +120,11 @@ public class FXMLpanelPacienteController implements Initializable {
     }
 
     private void cargarTablaPacientes(){
+        String pattern = "dd-MM-yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        DateTimeFormatter parser = DateTimeFormatter.ofPattern("d/M/y");
+
+
         JFXTreeTableColumn<Paciente, Integer> idPaciente = new JFXTreeTableColumn<>("Id");
         idPaciente.setPrefWidth(50);
         idPaciente.setCellValueFactory(cellData -> cellData.getValue().getValue().IdPacienteProperty().asObject());//el metodo asObject se utiliza para integer
@@ -137,6 +148,27 @@ public class FXMLpanelPacienteController implements Initializable {
         JFXTreeTableColumn<Paciente, LocalDate> fechaNac = new JFXTreeTableColumn<>("Fecha nacimiento");
         fechaNac.setPrefWidth(100);
         fechaNac.setCellValueFactory(cellData -> cellData.getValue().getValue().FechaNacProperty());
+        //Metodo para ajustar la fecha al formato dd-MM-aaaa
+        fechaNac.setCellFactory(column -> {
+            return new JFXTreeTableCell<Paciente, LocalDate>(){
+
+                @Override
+                protected void updateItem(LocalDate item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        // Format date.
+                        setText(formatter.format(item));
+            }
+
+                }
+            };
+        });
+
+
 
         JFXTreeTableColumn<Paciente, String> tfnoFijo = new JFXTreeTableColumn<>("Tfno. Fijo");
         tfnoFijo.setPrefWidth(90);

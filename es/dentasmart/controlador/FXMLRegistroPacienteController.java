@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -127,7 +128,7 @@ public class FXMLRegistroPacienteController implements Initializable {
     void editarPaciente(ActionEvent event) throws DAOException {
 
        try {
-           getPacienteFromTextField();
+           getPacienteToEditFromTextField();
            System.out.println("este es el pacienteToEdit " + pacienteToEdit);
            man.getPacienteDAO().modificar(pacienteToEdit);
            listaPacientes.set(listaPacientes.indexOf(pacienteSeleccionado), pacienteToEdit);
@@ -145,7 +146,7 @@ public class FXMLRegistroPacienteController implements Initializable {
     @FXML
     void guardarPaciente(ActionEvent event) throws DAOException {
 
-        getPacienteFromTextField();
+        getPacienteToAddFromTextField();
         try {
             man.getPacienteDAO().insertar(pacienteToEdit);
             System.out.println("este es el paciente nuevo " + pacienteToEdit);
@@ -156,23 +157,47 @@ public class FXMLRegistroPacienteController implements Initializable {
         }
     }
 
-    private void getPacienteFromTextField(){
+    private void getPacienteToEditFromTextField(){
         //pacienteToEdit.setIdPaciente(Integer.parseInt(String.valueOf(idPacienteTxt.getText())));
         pacienteToEdit = new Paciente();
-       // pacienteToEdit.setIdPaciente((Integer.parseInt(idPacienteTxt.getText())));
+        pacienteToEdit.setIdPaciente((Integer.parseInt(idPacienteTxt.getText())));
         pacienteToEdit.setDniPaciente(dniTxt.getText());
         pacienteToEdit.setNombrePaciente(nombreTxt.getText());
         pacienteToEdit.setPrimerApellido(apellido1Txt.getText());
         pacienteToEdit.setSegundoApellido(apellido2Txt.getText());
         pacienteToEdit.setDireccionCalle(direccionTxt.getText());
         pacienteToEdit.setLocalidad(localidadTxt.getText());
-        pacienteToEdit.setCodigoPostal(Integer.parseInt(String.valueOf(codPostalTxt.getText())));
+        pacienteToEdit.setCodigoPostal(codPostalTxt.getText());
+        //pacienteToEdit.setCodigoPostal(codPostalTxt.getText() != "" ? (Integer.parseInt(codPostalTxt.getText())) : 0);
         pacienteToEdit.setTelefonoFijo(tfnoFijoTxt.getText());
         pacienteToEdit.setTelefonoMovil(tfnoMovilTxt.getText());
         pacienteToEdit.setEmail(emailTxt.getText());
-        pacienteToEdit.setFechaNac(fechaNacTxt.getValue());
+        //pacienteToEdit.setFechaNac(fechaNacTxt.getValue());
+        pacienteToEdit.setFechaNac(fechaNacTxt.getValue() != null ? (fechaNacTxt.getValue()) : LocalDate.of(1, 1 , 1));
         pacienteToEdit.setPatologias(patologiasTxt.getText());
         pacienteToEdit.setObservaciones(observacionesTex.getText());
+
+    }
+
+    private void getPacienteToAddFromTextField(){
+        //pacienteToEdit.setIdPaciente(Integer.parseInt(String.valueOf(idPacienteTxt.getText())));
+        pacienteToEdit = new Paciente();
+        pacienteToEdit.setDniPaciente(dniTxt.getText());
+        pacienteToEdit.setNombrePaciente(nombreTxt.getText());
+        pacienteToEdit.setPrimerApellido(apellido1Txt.getText());
+        pacienteToEdit.setSegundoApellido(apellido2Txt.getText());
+        pacienteToEdit.setDireccionCalle(direccionTxt.getText());
+        pacienteToEdit.setLocalidad(localidadTxt.getText());
+        pacienteToEdit.setCodigoPostal(codPostalTxt.getText());
+        //pacienteToEdit.setCodigoPostal(codPostalTxt.getText() != "" ? (Integer.parseInt(codPostalTxt.getText())) : 0 );
+        pacienteToEdit.setTelefonoFijo(tfnoFijoTxt.getText());
+        pacienteToEdit.setTelefonoMovil(tfnoMovilTxt.getText());
+        pacienteToEdit.setEmail(emailTxt.getText());
+        //pacienteToEdit.setFechaNac(fechaNacTxt.getValue());
+        pacienteToEdit.setFechaNac(fechaNacTxt.getValue() != null ? (fechaNacTxt.getValue()) : LocalDate.of(1, 1 , 1));
+        pacienteToEdit.setPatologias(patologiasTxt.getText());
+        pacienteToEdit.setObservaciones(observacionesTex.getText());
+
     }
 
     private void cerrarVentana(ActionEvent event){
