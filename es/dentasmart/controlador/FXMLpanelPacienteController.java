@@ -155,7 +155,6 @@ public class FXMLpanelPacienteController implements Initializable {
                 @Override
                 protected void updateItem(LocalDate item, boolean empty) {
                     super.updateItem(item, empty);
-
                     if (item == null || empty) {
                         setText(null);
                         setStyle("");
@@ -163,12 +162,9 @@ public class FXMLpanelPacienteController implements Initializable {
                         // Format date.
                         setText(formatter.format(item));
             }
-
                 }
             };
         });
-
-
 
         JFXTreeTableColumn<Paciente, String> tfnoFijo = new JFXTreeTableColumn<>("Tfno. Fijo");
         tfnoFijo.setPrefWidth(90);
