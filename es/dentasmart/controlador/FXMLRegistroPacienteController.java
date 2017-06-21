@@ -8,10 +8,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import javax.swing.*;
 import java.net.URL;
@@ -88,7 +91,6 @@ public class FXMLRegistroPacienteController implements Initializable {
     SQLiteDaoManager man;
     Paciente pacienteToEdit;
     private ObservableList<Paciente> listaPacientes;
-    int indexPacienteSelec;
     Paciente pacienteSeleccionado;
 
 
@@ -109,6 +111,7 @@ public class FXMLRegistroPacienteController implements Initializable {
 
     public void setPacienteSeleccionado(Paciente pacienteSeleccionado) {
         this.pacienteSeleccionado = pacienteSeleccionado;
+
         idPacienteTxt.setText(String.valueOf(pacienteSeleccionado.getIdPaciente()));
         dniTxt.setText(pacienteSeleccionado.getDniPaciente());
         nombreTxt.setText(pacienteSeleccionado.getNombrePaciente());
@@ -125,36 +128,69 @@ public class FXMLRegistroPacienteController implements Initializable {
 
 
     @FXML
-    void editarPaciente(ActionEvent event) throws DAOException {
-
-       try {
-           getPacienteToEditFromTextField();
-           System.out.println("este es el pacienteToEdit " + pacienteToEdit);
-           man.getPacienteDAO().modificar(pacienteToEdit);
-           listaPacientes.set(listaPacientes.indexOf(pacienteSeleccionado), pacienteToEdit);
-           listaPacientes.add(pacienteToEdit);
-
-           cerrarVentana(event);
-           System.out.println("el indice del objeto a editar es: " +listaPacientes.indexOf(pacienteToEdit));
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+    void limpiarCampos(ActionEvent event) {
+        dniTxt.setText("");
+        nombreTxt.setText("");
+        apellido1Txt.setText("");
+        apellido2Txt.setText("");
+        direccionTxt.setText("");
+        localidadTxt.setText("");
+        codPostalTxt.setText("");
+        tfnoFijoTxt.setText("");
+        tfnoMovilTxt.setText("");
+        emailTxt.setText("");
+        fechaNacTxt.setValue(null);
     }
 
+    @FXML
+    void deshacer(ActionEvent event) {
+        System.out.println("clicked");
+        if(pacienteSeleccionado != null){
+            setPacienteSeleccionado(pacienteSeleccionado);
+        }else {
+            Notifications notificationBuilder = Notifications.create()
+                    .title("No hay un paciente seleccionado")
+                    .text("Debe seleccionar un paciente en la tabla")
+                    .graphic(null)
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_CENTER);
+            notificationBuilder.darkStyle();
+            notificationBuilder.showWarning();
+        }
+    }
 
 
     @FXML
     void guardarPaciente(ActionEvent event) throws DAOException {
 
-        getPacienteToAddFromTextField();
-        try {
-            man.getPacienteDAO().insertar(pacienteToEdit);
-            System.out.println("este es el paciente nuevo " + pacienteToEdit);
-            listaPacientes.add(pacienteToEdit);
-            cerrarVentana(event);
+        if (pacienteSeleccionado == null) {
+            getPacienteToAddFromTextField();
+            try {
+                man.getPacienteDAO().insertar(pacienteToEdit);
+                System.out.println("este es el paciente nuevo " + pacienteToEdit);
+                listaPacientes.add(pacienteToEdit);
+                cerrarVentana(event);
             } catch (DAOException e) {
-            e.printStackTrace();
+                e.printStackTrace();
+            }
+        }else {
+
+            try {
+                getPacienteToEditFromTextField();
+                System.out.println("este es el pacienteToEdit " + pacienteToEdit);
+                man.getPacienteDAO().modificar(pacienteToEdit);
+                listaPacientes.set(listaPacientes.indexOf(pacienteSeleccionado), pacienteToEdit);
+                //listaPacientes.add(pacienteToEdit);
+                pacienteToEdit = null;
+
+                cerrarVentana(event);
+                System.out.println("el indice del objeto a editar es: " +listaPacientes.indexOf(pacienteToEdit));
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
+
         }
+
     }
 
     private void getPacienteToEditFromTextField(){

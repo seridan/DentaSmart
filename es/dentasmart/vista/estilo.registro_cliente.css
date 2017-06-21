@@ -36,7 +36,7 @@
 }
 
 #btnVolver {
--fx-graphic: "/es/dentasmart/images/arrowleft.png";
+-fx-graphic: "/es/dentasmart/images/undo36px.png";
 -fx-opacity: 1;
 }
 
@@ -65,8 +65,8 @@
   -fx-word-wrap: normal;
   -fx-white-space: nowrap;
   -fx-direction: ltr;*/
-   -fx-font-size: 12 pt;
-   -fx-graphic: "/es/dentasmart/images/plus.png";
+   -fx-font-size: 18 pt;
+   -fx-graphic: "/es/dentasmart/images/AddUserx.png";
    -fx-font-family: "Material Icons";
    -fx-text-fill: white;
    -fx-opacity: 0.85;
@@ -76,7 +76,7 @@
   }
 
 #btnEditar{
-  -fx-font-size: 13 pt;
+  -fx-font-size: 15 pt;
   -fx-graphic: "/es/dentasmart/images/pencil.png";
   -fx-font-family: "Material Icons";
   -fx-text-fill: white;
@@ -86,12 +86,12 @@
   }
 
 #btnLimpiar{
- -fx-font-size: 13 pt;
-   -fx-graphic: "/es/dentasmart/images/broom.png";
-   -fx-font-family: "Material Icons";
-   -fx-text-fill: white;
-   -fx-opacity: 0.85;
-   -fx-background-color: #FF9800
+  -fx-font-size: 18 pt;
+  -fx-graphic: "/es/dentasmart/images/Broomx.png";
+  -fx-font-family: "Material Icons";
+  -fx-text-fill: white;
+  -fx-opacity: 0.85;
+  -fx-background-color: #FF9800
 
   /*-fx-font-family: "Material Icons";
   -fx-font-weight: normal;
