@@ -23,6 +23,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.cell.TextFieldTreeCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -116,18 +118,28 @@ public class FXMLpanelPacienteController implements Initializable {
     @FXML
     void eliminarPaciente(ActionEvent event) throws DAOException {
         if(pacienteSeleccionado != null){
+            Image image = new Image("/es/dentasmart/images/warning96.png");
+            Notifications notificationBuilder = Notifications.create()
+                    .title("No hay un paciente seleccionado")
+                    .text("Debe seleccionar un paciente en la tabla")
+                    .graphic(new ImageView(image))
+                    //.hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_CENTER);
+            notificationBuilder.darkStyle();
+            notificationBuilder.showWarning();
             System.out.println("este es el pacienteToEdit para eliminar " + pacienteSeleccionado);
             man.getPacienteDAO().eliminar(pacienteSeleccionado);
             pacientes.remove(pacienteSeleccionado);
         }else{
+            Image image = new Image("/es/dentasmart/images/warning96.png");
             Notifications notificationBuilder = Notifications.create()
                     .title("No hay un paciente seleccionado")
                     .text("Debe seleccionar un paciente en la tabla")
-                    .graphic(null)
+                    .graphic(new ImageView(image))
                     .hideAfter(Duration.seconds(3))
                     .position(Pos.BOTTOM_CENTER);
             notificationBuilder.darkStyle();
-            notificationBuilder.showWarning();
+            notificationBuilder.show();
         }
             }
 
