@@ -13,12 +13,14 @@ import es.dentasmart.dao.sqlite.SQLiteDaoManager;
 import es.dentasmart.modelo.Paciente;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.cell.TextFieldTreeCell;
@@ -27,6 +29,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -68,9 +72,13 @@ public class FXMLpanelPacienteController implements Initializable {
     @FXML
     private JFXButton btnBorrar;
 
+    @FXML
+    private StackPane dialogContainer;
+
     ObservableList<Paciente> pacientes = null;
     Paciente pacienteSeleccionado = null;
     SQLiteDaoManager man;
+
 
 
 
@@ -79,6 +87,7 @@ public class FXMLpanelPacienteController implements Initializable {
         cargarTablaPacientes();
         busqueda();
         getPacienteSeleccionado();
+
 
     }
 
@@ -118,7 +127,36 @@ public class FXMLpanelPacienteController implements Initializable {
     @FXML
     void eliminarPaciente(ActionEvent event) throws DAOException {
         if(pacienteSeleccionado != null){
-            Image image = new Image("/es/dentasmart/images/warning96.png");
+
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("ELIMINAR PACIENTE"));
+            content.setBody(new Text("¿Desea eliminar el paciente seleccionado?"));
+            JFXDialog dialog = new JFXDialog(dialogContainer, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton yesButton = new JFXButton("Eliminar");
+            JFXButton cancelButton = new JFXButton("Cancelar");
+            yesButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println("este es el pacienteToEdit para eliminar " + pacienteSeleccionado);
+                    try {
+                        man.getPacienteDAO().eliminar(pacienteSeleccionado);
+                    } catch (DAOException e) {
+                        e.printStackTrace();
+                    }
+                    pacientes.remove(pacienteSeleccionado);
+                    dialog.close();
+                }
+            });
+            cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+                }
+            });
+            content.setActions(yesButton, cancelButton);
+
+            dialog.show();
+            /*Image image = new Image("/es/dentasmart/images/warning96.png");
             Notifications notificationBuilder = Notifications.create()
                     .title("No hay un paciente seleccionado")
                     .text("Debe seleccionar un paciente en la tabla")
@@ -126,10 +164,8 @@ public class FXMLpanelPacienteController implements Initializable {
                     //.hideAfter(Duration.seconds(3))
                     .position(Pos.BOTTOM_CENTER);
             notificationBuilder.darkStyle();
-            notificationBuilder.showWarning();
-            System.out.println("este es el pacienteToEdit para eliminar " + pacienteSeleccionado);
-            man.getPacienteDAO().eliminar(pacienteSeleccionado);
-            pacientes.remove(pacienteSeleccionado);
+            notificationBuilder.showWarning();*/
+
         }else{
             Image image = new Image("/es/dentasmart/images/warning96.png");
             Notifications notificationBuilder = Notifications.create()

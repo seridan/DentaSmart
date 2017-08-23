@@ -69,3 +69,7 @@ HBox{
 
     }
 
+    .jfx-dialog{
+    -jfx-background-color: red;
+    }
+
